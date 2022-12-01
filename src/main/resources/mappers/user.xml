@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="user">
+    <insert id="register">
+        INSERT INTO user(user_id, user_pw, user_name, user_email, user_phone, user_gender, user_prop, user_mailox)
+        VALUES (#{r_user_id},#{r_user_pw_1},#{r_user_name},#{r_user_email},#{r_user_phone},#{r_user_gender},#{r_user_prop},#{r_user_mailox})
+    </insert>
+
+    <select id="login" resultType="string">
+        SELECT user_pw
+        FROM user
+        WHERE user_id=#{l_user_id}
+    </select>
+</mapper>
