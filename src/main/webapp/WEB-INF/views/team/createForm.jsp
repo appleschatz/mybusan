@@ -11,9 +11,9 @@
     <link href="../css/style.css" rel="stylesheet" type="text/css">	
 </head>
 <body>
-    <div class="title">팀 등록</div>
+    <div class="team_no">팀 등록</div>
     <form name='frm' method='post' action='create.do' enctype="multipart/form-data">
-        <input type="hidden" name="mediagroupno" value="${requestScope.mediagroupno}"><!-- 부모글번호 -->
+        <input type="hidden"><!-- 부모글번호 -->
         <table class='table'>
         <tr>
           <th>팀명</th>
@@ -51,7 +51,7 @@
         
         <div class="bottom">
         	<input type='submit' value='팀등록'>
-        	<input type="button" value="팀목록" onclick="location.href='list.jsp?mediagroupno=${requestScope.mediagroupno}'">
+        	<input type="button" value="팀목록" onclick="location.href='list.do'">
             <input type="button" value="HOME"  onclick="location.href='/home.do'"> <!-- 절대경로 -->
         </div>
     </form>

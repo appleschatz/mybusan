@@ -20,7 +20,7 @@ public class HomeController {
 		public ModelAndView home() {
 			ModelAndView mav=new ModelAndView();
 			//redirect : 등록한 명렁어를 호출할 수 있Da
-			mav.setViewName("redirect:/team/list.do");
+			mav.setViewName("redirect:/list.do");
 			return mav;
 		}//home() end
 	

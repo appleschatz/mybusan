@@ -19,18 +19,18 @@ public class TeamCont {
 		System.out.println("-----TeamCont() 객체 생성됨");
 	}
 	
-	 @RequestMapping(value = "team/create.do", method = RequestMethod.GET)
+	 @RequestMapping(value = "create.do", method = RequestMethod.GET)
 	    public String createForm() {
 	        return "team/createForm";
 	    }//createForm() end
 	
-	 @RequestMapping(value = "team/create.do", method = RequestMethod.POST)
+	 @RequestMapping(value = "create.do", method = RequestMethod.POST)
 	    public ModelAndView createProc(@ModelAttribute TeamDTO dto) {
 	        ModelAndView mav=new ModelAndView();
 	        
 	        int cnt=dao.create(dto);
 	        if(cnt==0) {
-	            mav.setViewName("team/creeateForm");//???
+	            mav.setViewName("team/createForm");//???
 	            String msg1 ="<p>팀 등록 실패</p>";
 	            String img  ="<img src='../images/fail.png'>";
 	            String link1="<input type='button' value='다시시도' onclick='javascript:history.back()'>";
@@ -40,22 +40,21 @@ public class TeamCont {
 	            mav.addObject("link1", link1);
 	            mav.addObject("link2", link2);
 	        }else {
-	            mav.setViewName("redirect:/team/list.do");
+	            mav.setViewName("team/list");
 	        }//if end
 	        return mav;
 	    }//createProc() end
 	
 	
-	 @RequestMapping("/team/list.do")
-	    public ModelAndView list(int team_no) {
+	 @RequestMapping("/list.do")
+	    public ModelAndView list() {
 	        ModelAndView mav=new ModelAndView();
 	        mav.setViewName("team/list");
-	        mav.addObject("list", dao.list(team_no));
-	        mav.addObject("team_no", team_no); //부모글번호
+	
 	        return mav;
 	    }//list() end
 	 
-	 @RequestMapping(value = "team/delete.do", method = RequestMethod.GET)
+	 @RequestMapping(value = "delete.do", method = RequestMethod.GET)
 	    public ModelAndView deleteForm(int team_no) {
 	        ModelAndView mav=new ModelAndView();
 	        mav.setViewName("team/deleteForm");
@@ -63,7 +62,7 @@ public class TeamCont {
 	        return mav;
 	    }//deleteForm() end
 	 
-	 @RequestMapping(value = "team/delete.do", method = RequestMethod.POST)
+	 @RequestMapping(value = "delete.do", method = RequestMethod.POST)
 	    public ModelAndView deleteProc(int team_no) {
 	        ModelAndView mav=new ModelAndView();
 	        
@@ -78,13 +77,13 @@ public class TeamCont {
 	            mav.addObject("link1", link1);
 	            mav.addObject("link2", link2);
 	        }else {
-	            mav.setViewName("redirect:/team/list.do");
+	            mav.setViewName("redirect:/list.do");
 	        }//if end
 	        
 	        return mav;
 	    }//deleteForm() end
 	 
-	 @RequestMapping(value="team/update.do", method = RequestMethod.GET)
+	 @RequestMapping(value="update.do", method = RequestMethod.GET)
 	    public ModelAndView updateForm(int team_no) {
 	        ModelAndView mav=new ModelAndView();
 	        mav.setViewName("team/updateForm");
@@ -93,7 +92,7 @@ public class TeamCont {
 	        return mav;
 	    }//updateForm() end
 	 
-	 @RequestMapping(value="mediagroup/update.do", method = RequestMethod.POST)
+	 @RequestMapping(value="update.do", method = RequestMethod.POST)
 	    public ModelAndView updateProc(@ModelAttribute TeamDTO dto) {
 	        ModelAndView mav=new ModelAndView();
 	        
@@ -108,7 +107,7 @@ public class TeamCont {
 	            mav.addObject("link1", link1);
 	            mav.addObject("link2", link2);
 	        }else {
-	            mav.setViewName("redirect:/team/list.do");
+	            mav.setViewName("redirect:/list.do");
 	        }//if end
 	        
 	        return mav;

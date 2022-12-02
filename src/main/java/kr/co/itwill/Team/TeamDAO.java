@@ -25,7 +25,7 @@ public class TeamDAO {
         System.out.println("-----TeamDAO()객체 생성됨");
     }//end
 
-    public List<TeamDTO> list(int mediagroupno) {
+    public List<TeamDTO> list(int team_no) {
         List<TeamDTO> list=null;
         try {
             sql=new StringBuilder();

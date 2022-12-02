@@ -13,8 +13,7 @@
 <body>
     <div class="title">팀 수정</div>
     <form name="frm" method="post" action="update.do" enctype="multipart/form-data">
-        <input type="hidden" name="mediagroupno" value="${dto.mediagroupno}"><!-- 부모글번호(음원목록을 유지하기 위해) -->
-        <input type="hidden" name="mediano"      value="${dto.mediano}">     <!-- 내글번호 -->
+        <input type="hidden" name="team_no"      value="${dto.team_no}">     <!-- 내글번호 -->
         <table class='table'>
         <tr>
           <th>팀명</th>
@@ -49,7 +48,7 @@
 
         <div class='bottom'>
           <input type='submit' value='팀수정'>
-          <input type="button" value="팀목록" onclick="location.href='list.do">
+          <input type="button" value="팀목록" onclick="location.href='/list.do">
           <input type="button" value="HOME"   onclick="location.href='/home.do'">   
         </div>  
     </form>
