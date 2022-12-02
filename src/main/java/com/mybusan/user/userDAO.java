@@ -18,6 +18,9 @@ public class userDAO {
         sqlSession.insert("user.register", map);
     }
 
+    public Integer idoverlap(String r_user_id){
+        return sqlSession.selectOne("user.idoverlap", r_user_id);
+    }
     /*public String FindID(String s_user_name){
         return sqlSession.selectOne("user.findid");
     }*/

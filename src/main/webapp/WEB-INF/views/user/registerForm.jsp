@@ -2,6 +2,38 @@
 <html>
 <head>
     <title>registerForm</title>
+    <script src="/js/jquery-3.6.1.min.js"></script>
+    <script>
+        function idOverlapCheck(){
+            $.ajax({
+                url:'/id_overlap',
+                type:'POST',
+                data:{'r_user_id':$('#r_user_id').val()},
+                success:function(data){
+                    if(data=="overlap"){
+                        alert("이미 사용중인 ID입니다");
+                    }
+                    else{
+                        alert("사용가능한 ID입니다");
+                    }
+                }
+            });
+        }
+
+        function pwOverlapCheck(){
+            if($('#r_user_pw_1').val()!=$('#r_user_pw_2').val()){
+                $('#pw_overlap').html("비밀번호가 일치하지 않습니다");
+            }
+            else{
+                $('#pw_overlap').html("비밀번호가 일치합니다");
+            }
+        }
+
+        $(function(){
+            if($('#r_user_email_s').val()=="N"){
+            }
+        });
+    </script>
 </head>
 <body>
     <form name="registerForm" id="registerForm" method="post" action="registerProc" enctype="multipart/form-data">
@@ -9,7 +41,7 @@
             <tr>
                 <td>아이디</td>
                 <td><input type="text" name="r_user_id" id="r_user_id" placeholder="아이디" required></td>
-                <td><input type="button" value="아이디 중복 확인"></td>
+                <td><input type="button" name="id_overlap" id="id_overlap" onclick="idOverlapCheck();" value="아이디 중복 확인"></td>
             </tr>
             <tr>
                 <td>비밀번호</td>
@@ -17,7 +49,8 @@
             </tr>
             <tr>
                 <td>비밀번호 확인</td>
-                <!--<td><input type="password" id="user_pw2" placeholder="비밀번호 확인" required></td>-->
+                <td><input type="password" name="r_user_pw_2" id="r_user_pw_2" onkeyup="pwOverlapCheck();" placeholder="비밀번호 확인" required></td>
+                <td><div id="pw_overlap"></div></td>
             </tr>
             <tr>
                 <td>이름</td>
@@ -35,7 +68,7 @@
                         <option value="gmail">gmail.com</option>
                     </select>
                 </td>
-                <td><input type="button" value="이메일 중복 확인"></td>
+                <td><input type="button" id="email_overlap" value="이메일 중복 확인"></td>
             </tr>
             <tr>
                 <td>연락처</td>
@@ -72,5 +105,17 @@
             </tr>
         </table>
     </form>
+<script>
+    $("#email_overlap").click(function(){
+    });
+
+    $('#r_user_email_s').change(function(){
+        if($('#r_user_email_s').val()=="naver"){
+            $('#r_user_email_2').val('naver.com');
+            $('#r_user_email_2').text('naver.com');
+            $('#r_user_email_2').attr("readonly",true);
+        }
+    });
+</script>
 </body>
 </html>

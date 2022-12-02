@@ -40,7 +40,7 @@ public class userCont {
         if(password==null || !password.equals(l_user_pw)){
             System.out.println("F");
             mav.setViewName("user/loginForm");
-            mav.addObject("loginfail", "loginfailT");
+            mav.addObject("loginfail", true);
 
         }
         else{
@@ -82,6 +82,17 @@ public class userCont {
         userDao.register(map);
 
         return "user/loginForm";
+    }
+
+    @ResponseBody
+    @RequestMapping("/id_overlap")
+    public String IDoverlapCheck(@RequestParam String r_user_id){
+        if(userDao.idoverlap(r_user_id)==1){
+            return "overlap";
+        }
+        else{
+            return "Noverlap";
+        }
     }
 
 

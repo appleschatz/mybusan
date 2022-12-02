@@ -6,7 +6,6 @@
     <script src="/js/jquery-3.6.1.min.js"></script>
     <script>
         var loginfail = "${loginfail}";
-        alert(loginfail);
         if(loginfail){
             alert("로그인 실패");
         }
