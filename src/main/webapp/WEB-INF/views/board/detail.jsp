@@ -23,7 +23,7 @@
 	</script>
 </head>
 <body>
-	<h3> 상품상세보기 / 상품수정 / 상품삭제 </h3>
+	<h3> 업적상세보기 / 업적수정 / 업적삭제 </h3>
 	<p>
 		<button type="button" onclick="location.href='/board/list'">글목록</button>
 	</p> 

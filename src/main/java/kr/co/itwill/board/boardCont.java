@@ -100,8 +100,8 @@ public class boardCont {
 				e.printStackTrace();
 			}//try end
 		}else {
-			String ce_sequence=map.get("ce_sequence").toString();
-			Map<String, Object> board=boardDao.detail(ce_sequence);
+			String ce_sequence = map.get("ce_sequence").toString();
+			Map<String, Object> board = boardDao.detail(ce_sequence);
 			filename=board.get("FILENAME").toString();
 			System.out.println(board);
 			filesize = Long.parseLong(board.get("FILESIZE").toString());

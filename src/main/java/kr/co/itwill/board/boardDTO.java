@@ -11,11 +11,7 @@ public class boardDTO {
    private String ce_review;
    //업적달성후기 
    private long ce_filename;
-   
-   private void sysout() {
-	// TODO Auto-generated method stub
-
-}
+	
    //업적 사진 파일
 
 	public boardDTO() {}
