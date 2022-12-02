@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 
-    <link href="../css/Bcss.css" rel="stylesheet" type="text/css" />
+    <link href="css/Bcss.css" rel="stylesheet" type="text/css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/carousel/">
     
@@ -26,7 +26,7 @@
     <header class="p-3 text-bg-white">
         <div class="container">
           <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-            <img src="C:\Users\kim young eun\Desktop\4조 아이콘 모음\아이콘 및 사진\아이콘.png" class="img-size">
+            <img src="images/아이콘.png" class="img-size">
               <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
             </a>
     
@@ -66,13 +66,13 @@
     <!-- The slideshow/carousel -->
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="C:\Users\kim young eun\Desktop\4조 아이콘 모음\아이콘 및 사진\광안대교_마린시티_풍경-1.jpg" alt="" class="d-block" style="width:100%">
+        <img src="images/광안대교_마린시티_풍경-1.jpg" alt="" class="d-block" style="width:100%">
       </div>
       <div class="carousel-item">
-        <img src="C:\Users\kim young eun\Desktop\4조 아이콘 모음\아이콘 및 사진\20201206-EX7A2469.jpg" alt="" class="d-block" style="width:100%">
+        <img src="images/20201206-EX7A2469.jpg" alt="" class="d-block" style="width:100%">
       </div>
       <div class="carousel-item">
-        <img src="C:\Users\kim young eun\Desktop\4조 아이콘 모음\아이콘 및 사진\66.jpg" alt="" class="d-block" style="width:100%">
+        <img src="images/66.jpg" alt="" class="d-block" style="width:100%">
       </div>
     </div>
     
@@ -95,7 +95,7 @@
   <div class="row row-cols-1 row-cols-md-3 g-4 r-style">
     <div class="col-lg-3">
       <div class="card h-100">
-        <img src="C:\Users\kim young eun\Desktop\4조 아이콘 모음\아이콘 및 사진\카드1.jpg" class="card-img-top" alt="...">
+        <img src="images/카드1.jpg" class="card-img-top" alt="...">
         <div class="card-body">
           <h6 class="card-title">여행정보</h6>
           <p class="card-text">부산의 관광명소, 음식점 등의 정보를 확인하세요.</p>
@@ -104,7 +104,7 @@
     </div>
     <div class="col-lg-3">
       <div class="card h-100">
-        <img src="C:\Users\kim young eun\Desktop\4조 아이콘 모음\아이콘 및 사진\카드2.jpg" class="card-img-top" alt="...">
+        <img src="images/카드2.jpg" class="card-img-top" alt="...">
         <div class="card-body">
           <h6 class="card-title">여행일정</h6>
           <p class="card-text">여행자들이 올려놓은 여행일정을 확인하고 나만의 일정을 계획해보세요.</p>
@@ -113,7 +113,7 @@
     </div>
     <div class="col-lg-3">
       <div class="card h-100">
-        <img src="C:\Users\kim young eun\Desktop\4조 아이콘 모음\아이콘 및 사진\카드3.jpg" class="card-img-top" alt="...">
+        <img src="images/카드3.jpg" class="card-img-top" alt="...">
         <div class="card-body">
           <h6 class="card-title">팀구하기</h6>
           <p class="card-text">여행자들과 정보를 공유하고 나만의 팀을 구해보세요.</p>
@@ -132,7 +132,7 @@
   <div class="row row-cols-1 row-cols-md-3 g-4 r-style">
     <div class="col-lg-3">
       <div class="card h-100">
-        <img src="C:\Users\kim young eun\Desktop\4조 아이콘 모음\아이콘 및 사진\케이블카.jpg" class="card-img-top" alt="...">
+        <img src="images/케이블카.jpg" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">Card title</h5>
           <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
@@ -144,7 +144,7 @@
     </div>
     <div class="col-lg-3">
       <div class="card h-100">
-        <img src="C:\Users\kim young eun\Desktop\4조 아이콘 모음\아이콘 및 사진\케이블카.jpg" class="card-img-top" alt="...">
+        <img src="images/케이블카.jpg" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">Card title</h5>
           <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
@@ -156,7 +156,7 @@
     </div>
     <div class="col-lg-3">
       <div class="card h-100">
-        <img src="C:\Users\kim young eun\Desktop\4조 아이콘 모음\아이콘 및 사진\케이블카.jpg" class="card-img-top" alt="...">
+        <img src="images/케이블카.jpg" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">Card title</h5>
           <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
@@ -170,7 +170,7 @@
     <div class="row row-cols-1 row-cols-md-3 g-4 r-style">
       <div class="col-lg-3">
         <div class="card h-100">
-          <img src="C:\Users\kim young eun\Desktop\4조 아이콘 모음\아이콘 및 사진\케이블카.jpg" class="card-img-top" alt="...">
+          <img src="images/케이블카.jpg" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Card title</h5>
             <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
@@ -182,7 +182,7 @@
       </div>
       <div class="col-lg-3">
         <div class="card h-100">
-          <img src="C:\Users\kim young eun\Desktop\4조 아이콘 모음\아이콘 및 사진\케이블카.jpg" class="card-img-top" alt="...">
+          <img src="images/케이블카.jpg" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Card title</h5>
             <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
@@ -194,7 +194,7 @@
       </div>
       <div class="col-lg-3">
         <div class="card h-100">
-          <img src="C:\Users\kim young eun\Desktop\4조 아이콘 모음\아이콘 및 사진\케이블카.jpg" class="card-img-top" alt="...">
+          <img src="images/케이블카.jpg" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Card title</h5>
             <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
@@ -215,21 +215,21 @@
       <!-- 인기 장소 TOP5 -->
       <div class="row i-style">
         <div class="col-lg-3">
-        <img src="C:\Users\kim young eun\Desktop\4조 아이콘 모음\아이콘 및 사진\케이블카.jpg" class="c-img" alt="...">
+        <img src="images/케이블카.jpg" class="c-img" alt="...">
         </div>
         <div class="col-lg-3">
-        <img src="C:\Users\kim young eun\Desktop\4조 아이콘 모음\아이콘 및 사진\케이블카.jpg" class="c-img" alt="...">
+        <img src="images/케이블카.jpg" class="c-img" alt="...">
         </div>
         <div class="col-lg-3">
-        <img src="C:\Users\kim young eun\Desktop\4조 아이콘 모음\아이콘 및 사진\케이블카.jpg" class="c-img" alt="...">
+        <img src="images/케이블카.jpg" class="c-img" alt="...">
           </div>
       </div>
       <div class="row ii-style">
         <div class="col-lg-5">
-          <img src="C:\Users\kim young eun\Desktop\4조 아이콘 모음\아이콘 및 사진\케이블카.jpg" class="cc-img" alt="...">
+          <img src="images/케이블카.jpg" class="cc-img" alt="...">
         </div>
         <div class="col-lg-4">
-          <img src="C:\Users\kim young eun\Desktop\4조 아이콘 모음\아이콘 및 사진\케이블카.jpg" class="ccc-img" alt="...">
+          <img src="images/케이블카.jpg" class="ccc-img" alt="...">
         </div>
       </div>
 
