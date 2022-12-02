@@ -35,5 +35,18 @@
 		     , ce_filename =  #{ce_filename}
 		WHERE ce_sequence  =  #{ce_sequence}
 	</update>
+	
+	<select id="filename" resultType="String">
+		SELECT filename
+		FROM ac_certification
+		WEHER ce_sequence = #{ce_sequence}
+	</select>
+	
+	<delete id="delete">
+		DELETE 
+		FROM ac_certification
+		WEHRE ce_sequence = #{ce_sequence}
+	</delete>
+	
 </mapper>
 

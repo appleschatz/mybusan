@@ -38,4 +38,12 @@ public class boardDAO {
 	public void update(Map<String, Object> map) {
 		sqlSession.update("board.update", map);
 	}//update() end
+	
+	public String filename(int ce_sequence) {
+		return sqlSession.selectOne("ce_filename" , ce_sequence);
+	}//filename () end
+	
+	public void delete(int ce_sequence) {
+		sqlSession.delete("board.delete", ce_sequence);
+	}//delete() end
 }//class end

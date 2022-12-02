@@ -113,4 +113,19 @@ public class boardCont {
 		boardDao.update(map);
 		return "redirect:/board/list";
 	}//update() end
+    
+    @RequestMapping("/delete")
+	public String delete(int ce_sequence, HttpServletRequest req) {
+		String filename=boardDao.filename(ce_sequence); //파일삭제
+		if(filename != null && !filename.equals("-")) {
+			ServletContext application=req.getSession().getServletContext();
+			String path=application.getRealPath("/storage");
+			File file=new File(path+"/"+filename);
+			if(file.exists()) {
+				file.delete();
+			}//if end 
+		}//if end
+		boardDao.delete(ce_sequence);//행삭제
+		return "redirect:/board/list";
+	}//delete() end
 }//class end
