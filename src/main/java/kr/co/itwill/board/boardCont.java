@@ -108,9 +108,9 @@ public class boardCont {
             
 		}//if end
 		
-		map.put("filename", filename);
+		map.put("ce_filename", filename);
 		map.put("filesize", filesize);
-		productDao.update(map);
-		return "redirect:/product/list";
+		boardDao.update(map);
+		return "redirect:/board/list";
 	}//update() end
 }//class end
