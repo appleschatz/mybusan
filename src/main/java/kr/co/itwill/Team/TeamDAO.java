@@ -25,13 +25,13 @@ public class TeamDAO {
         System.out.println("-----TeamDAO()객체 생성됨");
     }//end
 
-    public List<TeamDTO> list(int mediagroupno) {
+    public List<TeamDTO> list(int team_no) {
         List<TeamDTO> list=null;
         try {
             sql=new StringBuilder();
             sql.append(" SELECT team_no, , s_no, user_id, team_name, team_intro, team_interest, team_number,team_sdate,team_edate,team_state ");
             sql.append(" FROM team ");
-            sql.append(" ORDER BY teamno DESC ");
+            sql.append(" ORDER BY team_no DESC ");
             
             RowMapper<TeamDTO> rowMapper=new RowMapper<TeamDTO>() {
                 @Override

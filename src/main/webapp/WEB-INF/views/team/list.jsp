@@ -17,7 +17,7 @@
 <body>
     <div class="title">팀 목록</div>
     <div class="content">
-        <input type="button" value="팀 등록" onclick="location.href='create.do}'">
+        <input type="button" value="팀 등록" onclick="location.href='create.do'">
         <input type="button" value="HOME"   onclick="location.href='/home.do'">
     </div>
     
