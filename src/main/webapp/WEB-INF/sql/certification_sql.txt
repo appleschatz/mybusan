@@ -1,0 +1,10 @@
+
+- 업적 인증 테이블
+
+Create table	ac_ certification(
+	ce_sequence				varchar primary key	  -- 업적 글 번호
+	,ce_name				varchar	not null 	  -- 업적명	
+	,ce_content				varchar not null      -- 업적내용
+	,ce_ review				varchar not null      -- 업적달성후기
+	,ce_filename			varchar not null	  -- 업적 사진 파일
+);
