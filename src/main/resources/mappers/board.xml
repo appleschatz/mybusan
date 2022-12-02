@@ -26,5 +26,14 @@
 		FROM ac_certification
 		WHERE ce_sequence = #{ce_sequence}
 	</select>
+	
+	<update id="update">
+		UPDATE board
+		SET  ce_name       =  #{ce_name}
+		     , ce_content  =  #{ce_content}
+		     , ce_review   =  #{ce_review}
+		     , ce_filename =  #{ce_filename}
+		WHERE ce_sequence  =  #{ce_sequence}
+	</update>
 </mapper>
 
