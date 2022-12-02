@@ -34,4 +34,8 @@ public class boardDAO {
 	public Map<String, Object> detail(String ce_sequence ){
 		return sqlSession.selectOne("board.detail", ce_sequence);
 	}//detail() end
+	
+	public void update(Map<String, Object> map) {
+		sqlSession.update("board.update", map);
+	}//update() end
 }//class end
