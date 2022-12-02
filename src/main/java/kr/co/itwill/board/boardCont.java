@@ -87,24 +87,24 @@ public class boardCont {
 		    			,@RequestParam MultipartFile img
 		    			, HttpServletRequest req) {
 		
-		String filename="-";
-		long filesize=0;
-		if(img != null && !img.isEmpty()) {
+		String filename= "-";
+		long filesize = 0;
+		if(img != null && !img.isEmpty()){
 			filename=img.getOriginalFilename();
 			filesize=img.getSize();
 			try {
 				ServletContext application=req.getSession().getServletContext();
 				String path=application.getRealPath("/storage");
 				img.transferTo(new File(path+"/"+filename));
+				
 			}catch (Exception e) {
 				e.printStackTrace();
-			}//try end
+			}//try end 
 		}else {
 			String ce_sequence = map.get("ce_sequence").toString();
 			Map<String, Object> board = boardDao.detail(ce_sequence);
-			filename=board.get("FILENAME").toString();
+			filename = board.get("ce_filename").toString();
 			System.out.println(board);
-			filesize = Long.parseLong(board.get("FILESIZE").toString());
             
 		}//if end
 		

@@ -11,7 +11,7 @@
 <body>
 	<h3>업적인증</h3>
 	<p>
-		<button type="button" onclick="location.href='/home.do'">목록으로</button>
+		<button type="button" onclick="location.href='/board/list'">목록으로</button>
 	</p>
 <!--  	
 	Create table	ac_ certification(

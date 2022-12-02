@@ -43,8 +43,7 @@
 	</select>
 	
 	<delete id="delete">
-		DELETE 
-		FROM ac_certification
+		DELETE FROM ac_certification
 		WEHRE ce_sequence = #{ce_sequence}
 	</delete>
 	
