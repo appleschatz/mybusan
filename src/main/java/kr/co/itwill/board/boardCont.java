@@ -81,4 +81,36 @@ public class boardCont {
 		mav.addObject("board" , boardDao.detail(ce_sequence));
 		return mav;
 	}//detail() end
+    
+    @RequestMapping("/update")
+	public String update(@RequestParam Map<String, Object> map
+		    			,@RequestParam MultipartFile img
+		    			, HttpServletRequest req) {
+		
+		String filename="-";
+		long filesize=0;
+		if(img != null && !img.isEmpty()) {
+			filename=img.getOriginalFilename();
+			filesize=img.getSize();
+			try {
+				ServletContext application=req.getSession().getServletContext();
+				String path=application.getRealPath("/storage");
+				img.transferTo(new File(path+"/"+filename));
+			}catch (Exception e) {
+				e.printStackTrace();
+			}//try end
+		}else {
+			String ce_sequence=map.get("ce_sequence").toString();
+			Map<String, Object> board=boardDao.detail(ce_sequence);
+			filename=board.get("FILENAME").toString();
+			System.out.println(board);
+			filesize = Long.parseLong(board.get("FILESIZE").toString());
+            
+		}//if end
+		
+		map.put("filename", filename);
+		map.put("filesize", filesize);
+		productDao.update(map);
+		return "redirect:/product/list";
+	}//update() end
 }//class end
