@@ -25,13 +25,13 @@ public class TeamDAO {
         System.out.println("-----TeamDAO()객체 생성됨");
     }//end
 
-    public List<TeamDTO> list(int team_no) {
+    public List<TeamDTO> list() {
         List<TeamDTO> list=null;
         try {
             sql=new StringBuilder();
-            sql.append(" SELECT team_no, , s_no, user_id, team_name, team_intro, team_interest, team_number,team_sdate,team_edate,team_state ");
+            sql.append(" SELECT team_no, s_no, user_id, team_name, team_intro, team_interest, team_number,team_sdate,team_edate,team_state ");
             sql.append(" FROM team ");
-            sql.append(" ORDER BY team_no DESC ");
+            
             
             RowMapper<TeamDTO> rowMapper=new RowMapper<TeamDTO>() {
                 @Override
@@ -41,7 +41,7 @@ public class TeamDAO {
                            dto.setTeam_no(rs.getInt("team_no"));
                            dto.setS_no(rs.getInt("s_no"));
                            dto.setUser_id(rs.getString("user_id"));
-                           dto.setTema_name(rs.getString("team_name"));
+                           dto.setTeam_name(rs.getString("team_name"));
                            dto.setTeam_intro(rs.getString("team_intro"));
                            dto.setTeam_interest(rs.getString("team_interest"));
                            dto.setTeam_number(rs.getInt("team_number"));
@@ -64,6 +64,19 @@ public class TeamDAO {
         
     }//list() end
     
+    public int totalRowCount() {
+        int cnt=0;
+        try {
+            sql=new StringBuilder();
+            sql.append(" SELECT COUNT(*) FROM team ");
+            cnt=jt.queryForObject(sql.toString(), Integer.class);
+        }catch(Exception e){
+            System.out.println("전체 행 갯수:" + e);
+        }//end
+        return cnt;
+    }//totalRowCount() end
+    
+    
     public int create(TeamDTO dto) {
         int cnt = 0;
         try {
@@ -71,14 +84,14 @@ public class TeamDAO {
             
            
             sql.append(" INSERT INTO team(team_no,s_no,user_id,team_name, team_intro, team_interest, team_number, team_sdate,team_edate,team_state) ");
-            sql.append(" VALUES( (select ifnull(max(team_no),0)+1 from team as TB), ?, ?, ?, ?, ?,?,now(),?, ?) ");
+            sql.append(" VALUES( (select ifnull(max(team_no)+1,1) from team as TM), ?, ?, ?, ?, ?,?,now(),?, '진행중') ");
             
            
             //Maria DB
             //sql.append(" INSERT INTO media(mediano, title, rdate, poster, filename, filesize, mview, mediagroupno)");
             //sql.append(" VALUES((select ifnull(max(mediano),0)+1 from media as TB), ?, now(), ?, ?, ?, 'Y', ?)");            
             
-            cnt=jt.update(sql.toString(),dto.getS_no(), dto.getUser_id(), dto.getTeam_name(), dto.getTeam_intro(), dto.getTeam_interest(), dto.getTeam_number(),dto.getTeam_edate(),dto.getTeam_state());
+            cnt=jt.update(sql.toString(),dto.getS_no(), dto.getUser_id(), dto.getTeam_name(), dto.getTeam_intro(), dto.getTeam_interest(), dto.getTeam_number(),dto.getTeam_edate());
         } catch (Exception e) {
             System.out.println("팀등록실패"+e);
         }//end
@@ -102,7 +115,7 @@ public class TeamDAO {
               public TeamDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
                   TeamDTO dto=new TeamDTO();
                   dto.setTeam_no(rs.getInt("team_no"));
-                  dto.setTema_name(rs.getString("team_name"));
+                  dto.setTeam_name(rs.getString("team_name"));
                   dto.setTeam_intro(rs.getString("team_intro"));
                   dto.setTeam_interest(rs.getString("team_interest"));
                   dto.setTeam_number(rs.getInt("team_number"));
@@ -139,9 +152,23 @@ public class TeamDAO {
         try {
           sql = new StringBuilder();
           sql.append(" UPDATE team ");
-          sql.append(" SET team_name=?, team_intro=?, team_interest=?, team_number=?, team_edate ");
+          sql.append(" SET team_name=?, team_intro=?, team_interest=?, team_number=?, team_edate=? ");
           sql.append(" WHERE team_no=? "); 
           cnt = jt.update(sql.toString(), dto.getTeam_name(), dto.getTeam_intro(), dto.getTeam_interest(), dto.getTeam_number(), dto.getTeam_edate());
+        } catch (Exception e) {
+           System.out.println("수정실패"+e);
+        }//end
+        return cnt;
+    }//update end
+    
+    public int updatestate(TeamDTO dto) {
+        int cnt = 0;
+        try {
+          sql = new StringBuilder();
+          sql.append(" UPDATE team ");
+          sql.append(" SET team_state='완료' ");
+          sql.append(" WHERE team_no=? "); 
+          cnt = jt.update(sql.toString());
         } catch (Exception e) {
            System.out.println("수정실패"+e);
         }//end

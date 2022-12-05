@@ -35,6 +35,10 @@
           <th>모집 종료일</th>
           <td><input type="date" name="team_edate" value='sysdate'></td>
         </tr>
+         <tr>
+          <th>회원 아이디</th>  <!--나중에는 히든으로 끌어오기? -->
+          <td><input type="text" name="user_id" ></td>
+        </tr>
         
         
         

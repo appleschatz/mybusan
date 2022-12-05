@@ -1,5 +1,7 @@
 package kr.co.itwill.Team;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.itwill.Team.TeamDAO;
+
 
 @Controller
 public class TeamCont {
@@ -35,12 +38,12 @@ public class TeamCont {
 	            String img  ="<img src='../images/fail.png'>";
 	            String link1="<input type='button' value='다시시도' onclick='javascript:history.back()'>";
 	            String link2="<input type='button' value='그룹목록' onclick='location.href=\"list.do\"'>";
-	            mav.addObject("msg1",  msg1);   
+	            mav.addObject("msg1",  msg1);
 	            mav.addObject("img",   img);
 	            mav.addObject("link1", link1);
 	            mav.addObject("link2", link2);
 	        }else {
-	            mav.setViewName("team/list");
+	            mav.setViewName("redirect:/list.do");
 	        }//if end
 	        return mav;
 	    }//createProc() end
@@ -51,8 +54,25 @@ public class TeamCont {
 	        ModelAndView mav=new ModelAndView();
 	        mav.setViewName("team/list");
 	
+	        int totalRowCount=dao.totalRowCount(); //총 글갯수
+	        List<TeamDTO> list=dao.list();
+	        
+	        mav.addObject("list",  list);
+	        mav.addObject("count", totalRowCount);
+	        
 	        return mav;
 	    }//list() end
+	 
+	 @RequestMapping("/read.do")
+	    public ModelAndView read(int team_no) {
+	        ModelAndView mav=new ModelAndView();
+	        mav.setViewName("team/read");
+	        TeamDTO dto=dao.read(team_no);
+	       
+	        
+	        mav.addObject("dto", dto);
+	        return mav;
+	    }//read() end
 	 
 	 @RequestMapping(value = "delete.do", method = RequestMethod.GET)
 	    public ModelAndView deleteForm(int team_no) {
@@ -97,6 +117,27 @@ public class TeamCont {
 	        ModelAndView mav=new ModelAndView();
 	        
 	        int cnt=dao.update(dto);
+	        if(cnt==0) {
+	            mav.setViewName("team/msgView");
+	            String img  ="<img src='../images/fail.png'>";
+	            String link1="<input type='button' value='다시시도' onclick='javascript:history.back()'>";
+	            String link2="<input type='button' value='그룹목록' onclick='location.href=\"list.do\"'>";
+	            mav.addObject("msg1", "<p>팀 수정 실패!!</p>");  
+	            mav.addObject("img",   img);
+	            mav.addObject("link1", link1);
+	            mav.addObject("link2", link2);
+	        }else {
+	            mav.setViewName("redirect:/list.do");
+	        }//if end
+	        
+	        return mav;
+	    }//updateProc() end
+	 
+	 @RequestMapping(value="updatestate.do", method = RequestMethod.POST)
+	    public ModelAndView updatestate(@ModelAttribute TeamDTO dto) {
+	        ModelAndView mav=new ModelAndView();
+	        
+	        int cnt=dao.updatestate(dto);
 	        if(cnt==0) {
 	            mav.setViewName("team/msgView");
 	            String img  ="<img src='../images/fail.png'>";

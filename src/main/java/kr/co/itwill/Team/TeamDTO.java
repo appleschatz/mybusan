@@ -11,6 +11,7 @@ public class TeamDTO {
 	    private String team_sdate;
 	    private String team_edate;
 	    private String team_state;
+	    
 		public int getTeam_no() {
 			return team_no;
 		}
@@ -32,8 +33,8 @@ public class TeamDTO {
 		public String getTeam_name() {
 			return team_name;
 		}
-		public void setTema_name(String tema_name) {
-			this.team_name = tema_name;
+		public void setTeam_name(String team_name) {
+			this.team_name = team_name;
 		}
 		public String getTeam_intro() {
 			return team_intro;

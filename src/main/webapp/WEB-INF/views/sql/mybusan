@@ -1,0 +1,329 @@
+
+-------------------------------------------------윤성호------------------------------------------------
+-- 일정
+create table schedule( s_no int(10) primary key, user_id varchar(255) not null, s_title varchar(255) not null, s_content varchar(2000), s_rdate date not null default sysdate(), s_startdate date not null, s_enddate date not null, s_viewcount int(10) not null, s_tag int(1));
+
+insert into schedule values(1,'kim1','해운대로','조개 구워먹기','2022-03-21','2022-05-01','2022-05-05',40,1);
+
+insert into schedule values(2,'lee11','광안대교 보는 여행','갈매기 새우깡주기','2022-04-02','2022-04-10','2022-04-13',7,2);
+
+insert into schedule values(3,'choi11','부산 먹거리 여행','회 한접시 후루룩
+','2022-04-28','2022-05-10','2022-05-12',55,3);
+
+
+
+-- 일정 상세
+create table s_detail( d_no int(10) primary key, s_no int(10) not null, p_code varchar(100) not null, d_classification int(2) not null, d_order int(2) not null);
+
+insert into s_detail values(1,1,'m1',1,1);
+insert into s_detail values(2,1,'m2',1,2);
+insert into s_detail values(3,1,'m3',2,1);
+
+
+-- 일정 댓글
+
+create table s_comment( c_no int(10) primary key, s_no int(10) not null, user_id varchar(255) not null, c_content varchar(500) not null);
+
+
+insert into s_comment values(1,1,'kim1','맛있어보여요');
+insert into s_comment values(2,1,'lee11','멋져요');
+insert into s_comment values(3,2,'lee11','넘 배고파졌어요~');
+
+
+
+-- 일정 예산 및 메모
+
+create table s_memo( m_no int(10) primary key, s_no int(10) not null, m_classification int(2) not null, m_budget int(10), m_memo varchar(500));
+
+
+insert into s_memo values(1,1,1,10000,null);
+insert into s_memo values(2,1,2,20000,'조개가 기대돼');
+insert into s_memo values(3,2,1,55000,'조식이 기대돼');
+
+-----------------------------------------------성재윤--------------------------------------------------
+-- 장소테이블 
+create table place(
+p_code varchar(100) NOT NULL PRIMARY KEY 
+,p_name varchar(100) NOT NULL
+,p_ename varchar(100) NOT NULL
+,p_sido varchar(100) NOT NULL
+,p_sigungu varchar(100) NOT NULL
+,p_address varchar(100) NOT NULL
+,p_latitude int(20) NOT NULL
+,p_hardness int(20) NOT NULL
+,p_ddate date NOT NULL
+,p_expln varchar(100) NOT NULL
+,p_photo varchar(100) NOT NULL
+);
+
+INSERT INTO place VALUES ( 'm1', '노르딕', 'no' , '부산광역시' , '부산진구' , '부산광역시 부산진구 동평로 205 (부암동)' , '35.1687545' , '129.050147' , '2022.6.30' , '궁시렁궁시렁' , 'a.jpg');
+INSERT INTO place VALUES ( 'm2', '목구멍(명지점)', 'no2' , '부산광역시' , '강서구' , '부산광역시 강서구 명지국제6로 246(명지동)' , '35.0973706' , '128.923231' , '2022.6.30' , '궁시렁궁시렁' , 'b.jpg');
+INSERT INTO place VALUES ( 'g1', '해운대해수욕장', 'no3' , '부산광역시' , '해운대구' , '부산광역시 해운대구 재반로 61' , '35.1841612' , '129.12608' , '2022.6.30' , '궁시렁궁시렁' , 'c.jpg');
+
+-- 장소 리뷰 테이블 
+create table place_review(
+r_no int(20) NOT NULL PRIMARY KEY 
+,p_code varchar(255) NOT NULL
+,user_id varchar(255) NOT NULL
+,r_content varchar(255) NOT NULL
+,r_satisfaction int(2) NULL
+);
+
+INSERT INTO place_review VALUES ('1' , 'm1' , 'kim1' , '맛있다' , '10');
+INSERT INTO place_review VALUES ('2' , 'm2' , 'park11' , '여긴 맛없다' , '0'); 
+INSERT INTO place_review VALUES ('3' , 'g1' , 'lim1' , '멋있다!' , '5');
+
+-- 회원 테이블 
+create table user(
+user_id varchar(255) NOT NULL PRIMARY KEY 
+,user_pw varchar(255) NOT NULL
+,user_name varchar(255) NOT NULL
+,user_email varchar(255) NOT NULL
+,user_phone varchar(255) NULL
+,user_gender varchar(2) NOT NULL
+,user_prop	varchar(255) NULL
+,user_propk varchar(255) NULL
+,user_mailox varchar(255) NOT NULL
+,user_point int(100) NOT NULL
+);
+
+INSERT INTO user VALUES ('kim1' , 'dkdk11' , '김진수' , 'kim1@naver.com' , '010 2233 3344' , 'M' , '' , '' , 'Y' , '1');
+INSERT INTO user VALUES ('kim11' , 'dkdk112' , '김영은' , 'kim11@daum.net' , '010 3355 5577' , 'W' , 'pic1.jpg' , 'resources/images/defaultProfile/' , 'Y' , '0'); 
+INSERT INTO user VALUES ('lee1' , 'fnfn11' , '이하나' , 'lee1@naver.com' , '010 2211 1133' , 'W' , 'pic2.jpg' , 'resources/images/defaultProfile/' , 'N' , '1');
+
+-- 회원의 즐겨찾기 테이블
+create table s_bookmark(
+b_no int(255) NOT NULL PRIMARY KEY 
+,user_id varchar(100) NOT NULL
+,s_no int(255) NOT NULL
+);
+
+INSERT INTO s_bookmark VALUES ('1' , 'kim1' , '1');
+INSERT INTO s_bookmark VALUES ('2' , 'park1' , '1');
+INSERT INTO s_bookmark VALUES ('3' , 'choi11' , '2');
+-----------------------------------------------박을타--------------------------------------------------
+
+Create table advertisement(
+	ad_code 			varchar not null primary key
+	,ad_procedure		int 
+	,ad_category		varchar not null
+	,ad_ views			int not null
+	,ad_advertiser		varchar not null
+	,ad_ address		varchar not null
+	ad_startdate		date not null
+	ad_enddate		date not null
+	,ad_ link				varchar	);  — 광고테이블
+
+Insert into	advertisement values(“1”,”1”,”지역광고”,5453,”99부산대장”,”’resources/Advertising/defaultProfile/‘”,”2022-11-21”,”2023-11-21”,”https://www.visitbusan.net/kr/index.do”);
+
+Insert into	advertisement values(“2”,”2”,”음식점광고”, 32,”부산스타벅스”,”’resources/Advertising/defaultProfile/‘”,”2022-11-21”,”2023-11-21”,”https://www.starbucks.co.kr/index.do”);
+
+Insert into	advertisement values(“3”,”3”,”숙소”,2345,”르네상스호텔”,”’resources/Advertising/defaultProfile/‘”,”2022-11-21”,”2024-01-03”,”http://www.rshotel.co.kr/”);
+
+
+
+Create table	Questions(
+	q_no					varchar primary key
+	,user_id				varchar not null
+	,q_ contents		varchar not null
+	,q_filename		varchar 
+	,q_filepath			varchar ); — 문의테이블
+
+Insert into	Questions values(“1”,”lim1”,”해운대설명이 잘못됨”);
+Insert into	Questions values(“2”,”choi11”,”순대가 맛이없어요”,”tnseo.jpg”,”'resources/images/defaultProfile/'”);
+Insert into	Questions values(“3”,”kim1”,”사이트가 불편해요”);
+
+
+
+Create table	team_vote(
+	v_sequence		varchar primary key
+	,team_no			int(10) not null
+	,v_title				varchar not null 
+	,v_ explanation	varchar
+	,v_creationdate	date not null
+	,v_ deadline		date not null
+	,v_multipleselection int(2) ); — 투표테이블
+
+Insert into	team_vote values(“1”,1,”해운대에서 뭐 먹을까요?”,”해운대가서 먹을 밥집 투표”,”2022-05-02”,2022-05-07”,1);
+Insert into	team_vote values(“2”,2,”잠은 어디서 잘까요?”,”숙소 결정하는 투표”,”2022-06-03”,2022-06-08”,2);
+Insert into	team_vote values(“3”,3,”우리 어디로 갈까요?”,”여행 일정을 선택하는 투표”,”2022-06-15”,2022-06-19”,2);
+
+
+
+Create table	votingitem(
+	vi_sequence		varchar primary key
+	,v_sequence		varchar not null 
+	,vi_name			varchar not null ); — 투표항목테이블
+
+Insert into	votingitem(“1”,”1”,”돼지국밥”);
+Insert into	votingitem(“2”,”1”,”낙곱새”);
+Insert into	votingitem(“3”,”2”,”시그니엘 호텔”);
+
+
+Create table	voters(
+	vo_sequence		varchar primary key
+	,user_id				varchar not null 
+	,vi_sequence		varchar not null  ); — 투표참가자 테이블
+
+Insert into	voters(“1”,”kim1”,”1”);
+Insert into	voters(“2”,”lee1”,”1”);
+Insert into	voters(“3”,”park1”,”2”);
+
+
+ Create table 	Achievements(
+	ac_code				varchar primary key
+	,ac_name			varchar not null 
+	,ac_point			int(10) not null
+	,ac_contents		varchar not null ); — 업적목록테이블
+
+insert into Achievements values ('M1', '부산 맛집 탐방1', 1, '해운대 앞 조개구이 먹기');
+insert into Achievements values ('M2', '부산 맛집 탐방2', 2, '돼지국밥 먹기');
+insert into Achievements values ('L1', '관광지 방문1', 1, '해운대에서 셀카찍기');
+
+
+ Create table	ac_details(
+	acd_sequence		varchar primary key
+	,ac_code			varchar not null 
+	,p_code				varchar(100) not null ); — 업적상세테이블
+
+INSERT INTO ac_details VALUES ('1' , 'M1' , 'm1');
+INSERT INTO ac_details VALUES ('2' , 'M1' , 'm2');
+INSERT INTO ac_details VALUES ('3' , 'M1' , 'm3');
+
+Create table	ac_ certification(
+	ce_sequence				varchar primary key
+	ac_code						varchar not null 
+	team_no					varchar not null 
+	ce_ review					varchar not null 
+	ce_achievementdate	date
+	ce_ achievement			int(1) );
+
+INSERT INTO 	ac_ certification values(
+	“1”,”M1”,”1”,”해운대 왔어용”,”2022-04-26”,1);
+INSERT INTO 	ac_ certification values(
+	“2”,”L1”,”2”,”조개 먹었어용”,”2022-07-04”,1);
+INSERT INTO 	ac_ certification values(
+	“3”,”L2”,”1”,”피부 잘 태웠어용”,”2022-08-01”,2); — 업적인증테이블
+
+
+
+Create table	CertificationPhoto(
+	cp_sequence		varchar primary key
+	ce_sequence		varchar not null 
+	cp_name			varchar not null 
+	cp_pach				varchar not null ); — 업적인증 사진테이블
+
+INSERT INTO CertificationPhoto VALUES ('1' , '1' , 'muk1.jpg' , 'resources/images/defaultProfile/');
+INSERT INTO CertificationPhoto VALUES ('2' , '1' , 'muk2.jpg' , 'resources/images/defaultProfile/');
+INSERT INTO CertificationPhoto VALUES ('3' , '1' , 'wow.jpg' , 'resources/images/defaultProfile/')
+
+
+
+-----------------------------------------------김영은--------------------------------------------------
+--팀 개설 테이블
+create table team 
+(team_no int(10) not null primary key,
+s_no int(10) not null,
+user_id varchar(255) not null,
+team_name varchar(100) not null,
+team_intro text(1000) null,
+team_interest varchar(200) null,
+team_number int(3) not null,
+team_sdate date not null,
+team_edate date not null,
+team_state varchar(20) not null);
+
+--행 추가
+insert into team(team_no, s_no, user_id, team_name, team_intro,
+team_interest, team_number, team_sdate, team_edate, team_state)
+values (1, 1, 'kim1', '부산사나이들', '저희는 부산 사나이만 모십니다.',
+'해변', 5, '2022-04-05', '2022-04-10', '완료');
+
+insert into team(team_no, s_no, user_id, team_name, team_intro,
+team_interest, team_number, team_sdate, team_edate, team_state)
+values (2, 2, 'lee11', '맛집탐방가', '잘먹는 사람만 구합니다.',
+'해산물', 2, '2022-06-06', '2022-06-14', '완료');
+
+insert into team(team_no, s_no, user_id, team_name, team_intro,
+team_interest, team_number, team_sdate, team_edate, team_state)
+values (3, 2, 'sung11', '호캉스하실분', '집돌이들 여행은 가고 싶어요.',
+'바다', 3, '2022-12-30', '2023-01-10', '진행중');
+
+
+--팀 가입자 테이블
+create table team_member
+(team_mem_no int(10) not null primary key,
+team_no int(10) not null,
+user_id varchar(255) not null,
+team_mem_state varchar(10) not null,
+team_mem_adate date not null);
+
+--행추가
+insert into team_member(team_mem_no, team_no, user_id, team_mem_state,
+team_mem_adate)
+values (1, 1, 'lee1', '승인', '2022-11-01');
+
+insert into team_member(team_mem_no, team_no, user_id, team_mem_state,
+team_mem_adate)
+values (2, 1, 'park1', '승인', '2022-11-03');
+
+insert into team_member(team_mem_no, team_no, user_id, team_mem_state,
+team_mem_adate)
+values (3, 1, 'sung1', '승인', '2022-11-04');
+
+
+--팀 채팅방 테이블
+create table team_chattingroom
+(cr_no int(10) not null primary key,
+team_no int(10) not null,
+cr_state varchar(10) not null);
+
+--행추가
+insert into team_chattingroom(cr_no, team_no, cr_state)
+values (1, 1, '개설');
+
+insert into team_chattingroom(cr_no, team_no, cr_state)
+values (2, 2, '종료');
+
+insert into team_chattingroom(cr_no, team_no, cr_state)
+values (3, 3, '미개설');
+
+
+--팀 채팅방 참여자 테이블
+create table team_chattingroom_member
+(tcr_no int(10) not null primary key,
+cr_no int(10) not null,
+user_id varchar(255) not null);
+
+--행추가
+insert into team_chattingroom_member(tcr_no, cr_no, user_id)
+values (1, 1, 'kim1');
+
+insert into team_chattingroom_member(tcr_no, cr_no, user_id)
+values (2, 1, 'lee1');
+
+insert into team_chattingroom_member(tcr_no, cr_no, user_id)
+values (3, 1, 'park1');
+
+
+--팀 채팅 메세지 테이블
+create table team_chatting_message
+(cm_no int(10) not null,
+user_id varchar(255) not null,
+cr_no int(10) not null,
+cm_comment text(3000) not null,
+cm_time datetime not null);
+
+--행추가
+insert into team_chatting_message(cm_no, user_id, cr_no, cm_comment,
+cm_time)
+values (1, 'kim1', 1, '환영합니다.', '2022-11-22 9:30:00');
+
+insert into team_chatting_message(cm_no, user_id, cr_no, cm_comment,
+cm_time)
+values (2, 'lee1', 1, 'ㅎㅇ', '2022-11-22 9:31:00');
+
+insert into team_chatting_message(cm_no, user_id, cr_no, cm_comment,
+cm_time)
+values (3, 'park1', 1, '다들 어디 사세요?', '2022-11-22 9:33:00');
+
