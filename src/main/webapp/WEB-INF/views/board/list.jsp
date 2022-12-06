@@ -63,7 +63,7 @@
         <td><a href="detail/${row.ce_sequence}">${row.ce_content}</a></td>
 
         <td>${row.ce_review}</td>
-
+        
 		<td>${row.ce_filename}</td>
       
       </tr>
@@ -77,7 +77,24 @@
   		업적명 : <input type="text" name="ce_name" value="${ce_name}">
   				<input type="submit" value="검색">
   </form>
-	
+  <!--페이징-->
+  <ul class="btn-group pagination">
+    <c:if test="${pageMaker.prev }">
+    <li>
+        <a href='<c:url value="/board/list?page=${pageMaker.startPage-1 }"/>'><i class="fa fa-chevron-left"></i></a>
+    </li>
+    </c:if>
+    <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="pageNum">
+    <li>
+        <a href='<c:url value="/board/list?page=${pageNum }"/>'><i class="fa">${pageNum }</i></a>
+    </li>
+    </c:forEach>
+    <c:if test="${pageMaker.next && pageMaker.endPage >0 }">
+    <li>
+        <a href='<c:url value="/board/list?page=${pageMaker.endPage+1 }"/>'><i class="fa fa-chevron-right"></i></a>
+    </li>
+    </c:if>
+</ul>
 </div>
 
 </body> 

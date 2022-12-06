@@ -7,6 +7,7 @@
 		SELECT ce_sequence,ce_name,ce_content,ce_review,ce_filename
 		FROM ac_certification
 		ORDER BY ce_sequence
+		LIMIT 10 OFFSET 0
 	</select>
 	
 	<insert id="insert" parameterType="java.util.Map">
@@ -37,15 +38,18 @@
 	</update>
 	
 	<select id="filename" resultType="String">
-		SELECT filename
+		SELECT ce_filename
 		FROM ac_certification
-		WEHER ce_sequence = #{ce_sequence}
+		WHERE ce_sequence = #{ce_sequence}
 	</select>
-	
+
 	<delete id="delete">
 		DELETE FROM ac_certification
-		WEHRE ce_sequence = #{ce_sequence}
+		WHERE ce_sequence = #{ce_sequence}
 	</delete>
+
+
+	
 	
 </mapper>
 

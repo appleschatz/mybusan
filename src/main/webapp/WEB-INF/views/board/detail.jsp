@@ -14,7 +14,7 @@
 		document.form1.submit();
 	}//update() end
 	
-	function product_delete(){
+	function board_delete(){
 		if(confirm("영구히 삭제됩니다\n진행할까요?")){
 			document.form1.action="/board/delete";
 			document.form1.submit();

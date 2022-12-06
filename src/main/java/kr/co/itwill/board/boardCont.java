@@ -2,7 +2,6 @@ package kr.co.itwill.board;
 
 
 import java.io.File;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+
 @Controller
 @RequestMapping("/board")
 public class boardCont {
@@ -28,13 +28,13 @@ public class boardCont {
     boardDAO boardDao;
   
     @RequestMapping("/list")		//게시글 작성 화면 호출
-    public ModelAndView list() {
+    public ModelAndView list(@RequestParam(name = "page", defaultValue = "1") int pageNum) {
     	ModelAndView mav = new ModelAndView();
     	mav.setViewName("/board/list");
-    	mav.addObject("list",boardDao.list());
+    	mav.addObject("list",boardDao.list(pageNum));
     	return mav;
     }//list() end
-    
+
     @RequestMapping("/create.do")
     public String create() {
     	return "board/createform";
@@ -128,4 +128,7 @@ public class boardCont {
 		boardDao.delete(ce_sequence);//행삭제
 		return "redirect:/board/list";
 	}//delete() end
+    
+    
+    
 }//class end

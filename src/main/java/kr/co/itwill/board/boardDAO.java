@@ -16,10 +16,11 @@ public class boardDAO {
 	
 	//스프링 빈으로 생성된객체를 가져와서 연결하기
 	@Autowired
+	
 	SqlSession sqlSession;
 	
-	public List<Map<String, Object>> list(){
-		return sqlSession.selectList("board.list");
+	public List<Map<String, Object>> list(int pageNum){
+		return sqlSession.selectList("board.list",pageNum);
 	}
 	
 	public void insert(Map<String, Object> map) {
@@ -40,10 +41,13 @@ public class boardDAO {
 	}//update() end
 	
 	public String filename(int ce_sequence) {
-		return sqlSession.selectOne("ce_filename" , ce_sequence);
+		return sqlSession.selectOne("board.filename" , ce_sequence);
 	}//filename () end
 	
 	public void delete(int ce_sequence) {
 		sqlSession.delete("board.delete", ce_sequence);
 	}//delete() end
+
+
+
 }//class end
