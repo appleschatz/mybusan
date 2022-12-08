@@ -9,7 +9,8 @@ public class userDTO {
     private String user_email;
     private String user_phone;
     private String user_gender;
-    private MultipartFile user_prop;
+    private String user_prop;
+    private MultipartFile prop_file;
     private char user_mailox;
     private int user_point;
 
@@ -61,12 +62,20 @@ public class userDTO {
         this.user_gender = user_gender;
     }
 
-    public MultipartFile getUser_prop() {
+    public String getUser_prop() {
         return user_prop;
     }
 
-    public void setUser_prop(MultipartFile user_prop) {
+    public void setUser_prop(String user_prop) {
         this.user_prop = user_prop;
+    }
+
+    public MultipartFile getProp_file() {
+        return prop_file;
+    }
+
+    public void setProp_file(MultipartFile prop_file) {
+        this.prop_file = prop_file;
     }
 
     public char getUser_mailox() {

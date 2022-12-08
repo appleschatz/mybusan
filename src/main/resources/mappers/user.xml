@@ -2,20 +2,32 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="user">
-    <insert id="register">
-        INSERT INTO user(user_id, user_pw, user_name, user_email, user_phone, user_gender, user_prop, user_mailox)
-        VALUES (#{r_user_id},#{r_user_pw_1},#{r_user_name},#{r_user_email},#{r_user_phone},#{r_user_gender},#{r_user_prop},#{r_user_mailox})
-    </insert>
-
-    <select id="login" resultType="string">
-        SELECT user_pw
+    <select id="loginCheck" resultType="com.mybusan.user.userDTO">
+        SELECT user_id, user_pw
         FROM user
-        WHERE user_id=#{l_user_id}
+        WHERE user_id=#{user_id} AND user_pw=#{user_pw}
     </select>
 
-    <select id="idoverlap" resultType="Integer">
+    <insert id="register">
+        INSERT INTO user(user_id, user_pw, user_name, user_email, user_phone, user_gender, user_prop, user_mailox)
+        VALUES (#{user_id},#{user_pw},#{user_name},#{user_email},#{user_phone},#{user_gender},#{user_prop},#{user_mailox})
+    </insert>
+
+    <select id="idOverlapCheck" resultType="Integer">
         SELECT COUNT(user_id)
         FROM user
-        WHERE user_id=#{r_user_id}
+        WHERE user_id=#{user_id}
+    </select>
+
+    <select id="emailOverlapCheck" resultType="Integer">
+        SELECT COUNT(user_email)
+        FROM user
+        WHERE user_email=#{user_email}
+    </select>
+
+    <select id="phoneOverlapCheck" resultType="Integer">
+        SELECT COUNT(user_phone)
+        FROM user
+        WHERE user_phone=#{user_phone}
     </select>
 </mapper>

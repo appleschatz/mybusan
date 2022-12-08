@@ -1,8 +1,10 @@
 package com.mybusan.user;
 
 import jakarta.servlet.ServletContext;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,101 +22,102 @@ import java.util.Map;
 @Controller
 public class userCont {
     @Autowired
-    userDAO userDao;
+    userDAO userdao;
 
-    @RequestMapping(value = "/loginForm", method = RequestMethod.GET)
-    public String loginFormG(){
+    @RequestMapping("/") // * 지워도 됨
+    public String Home(){
         return "user/loginForm";
     }
 
-    @RequestMapping(value = "/loginForm", method = RequestMethod.POST)
-    public String loginFormP(){
+    @RequestMapping(value = "/loginForm")
+    public String loginForm(){
         return "user/loginForm";
     }
 
     @RequestMapping(value = "/loginProc", method = RequestMethod.POST)
-    public ModelAndView loginProcP(@RequestParam String l_user_id, @RequestParam String l_user_pw){
+    public ModelAndView loginProc(userDTO userdto, HttpServletRequest request, HttpServletResponse response, HttpSession session){
         ModelAndView mav = new ModelAndView();
-        String password = userDao.login(l_user_id);
 
-        if(password==null || !password.equals(l_user_pw)){
-            System.out.println("F");
-            mav.setViewName("user/loginForm");
+        if (session.getAttribute("login") != null){
+            // 기존에 login이란 세션 값이 존재한다면
+            session.removeAttribute("login"); // 기존값을 제거해 준다
+        }
+
+        userDTO dto = userdao.loginCheck(userdto); // 로그인 확인 과정
+
+        if(dto != null){ // 로그인 성공한 경우
+            session.setAttribute("login",dto);
+            mav.setViewName("redirect:/"); // * 홈으로 이동
+            if(request.getParameter("save_id") != null){ // 아이디 저장에 체크한 경우
+                Cookie cookie = new Cookie("saved_id", dto.getUser_id());
+                cookie.setMaxAge(60*60*24*10); // 10일 동안 아이디 보관
+                response.addCookie(cookie);
+            }
+        }
+        else{ // 로그인 실패한 경우
             mav.addObject("loginfail", true);
+            mav.setViewName("redirect:/loginForm");
+        }
 
-        }
-        else{
-            System.out.println("S");
-            mav.setViewName("user/myPage");
-        }
         return mav;
     }
 
-
-    @RequestMapping("/registerForm")
+    @RequestMapping(value = "/registerForm")
     public String registerForm(){
         return "user/registerForm";
     }
 
-    @RequestMapping("/registerProc")
-    public String registerProc(@RequestParam Map<String, Object> map, @RequestParam MultipartFile r_user_prop, HttpServletRequest req){
-        String filename = "-";
 
-        if(r_user_prop != null && !r_user_prop.isEmpty()){
-            filename = r_user_prop.getOriginalFilename();
+    @RequestMapping(value = "/registerProc", method = RequestMethod.POST)
+    public String registerProc(userDTO userdto, HttpServletRequest req){
+        String user_prop = "-";
+        MultipartFile prop_file = userdto.getProp_file();
 
+        if(prop_file != null && !prop_file.isEmpty()){
+            user_prop = prop_file.getOriginalFilename();
             try{
                 ServletContext application = req.getSession().getServletContext();
                 String path = application.getRealPath("/storage");
-                r_user_prop.transferTo(new File(path+"/"+filename));
+                prop_file.transferTo(new File(path+"/"+user_prop));
             }catch(Exception e){
                 e.printStackTrace();
             }
         }
-
-        String user_email = map.get("r_user_email_1")+"@"+map.get("r_user_email_2");
-        String user_phone = map.get("r_user_phone_1")+"-"+map.get("r_user_phone_2")+"-"+map.get("r_user_phone_3");
-
-        map.put("r_user_email",user_email);
-        map.put("r_user_phone",user_phone);
-        map.put("r_user_prop", filename);
-
-        userDao.register(map);
-
+        userdto.setUser_prop(user_prop);
+        userdao.register(userdto);
         return "user/loginForm";
     }
 
     @ResponseBody
-    @RequestMapping("/id_overlap")
-    public String IDoverlapCheck(@RequestParam String r_user_id){
-        if(userDao.idoverlap(r_user_id)==1){
-            return "overlap";
+    @RequestMapping("/id_overlap.do")
+    public int idOverlapCheck(userDTO userdto){
+        if(userdao.idOverlapCheck(userdto)==1){ // 중복된 경우
+            return 1;
         }
         else{
-            return "Noverlap";
+            return 0;
         }
     }
 
-
-/*    @RequestMapping("/FindIDForm")
-    public String FindIDForm(){
-        return "user/FindIDForm";
+    @ResponseBody
+    @RequestMapping("/email_overlap.do")
+    public int emailOverlapCheck(userDTO userdto){
+        if(userdao.emailOverlapCheck(userdto)==1){ // 중복된 경우
+            return 1;
+        }
+        else{
+            return 0;
+        }
     }
 
-    @RequestMapping("/FindIDProc")
-    public ModelAndView FindIdProc(@RequestParam String s_user_name){
-        ModelAndView mav = new ModelAndView();
-
-        userDao.FindID(s_user_name);
-
-        return mav;
+    @ResponseBody
+    @RequestMapping("/phone_overlap.do")
+    public int phoneOverlapCheck(userDTO userdto){
+        if(userdao.phoneOverlapCheck(userdto)==1){ // 중복된 경우
+            return 1;
+        }
+        else{
+            return 0;
+        }
     }
-
-    @RequestMapping("/FindIDResult")
-    public ModelAndView FindIDResult(){
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("user/FindIDResult");
-
-        return mav;
-    }*/
 }

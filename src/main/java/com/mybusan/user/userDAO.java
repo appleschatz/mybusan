@@ -11,17 +11,23 @@ public class userDAO {
     @Autowired
     SqlSession sqlSession;
 
-    public String login(String l_user_id){
-        return sqlSession.selectOne("user.login", l_user_id);
+    public userDTO loginCheck(userDTO userdto){
+        return sqlSession.selectOne("user.loginCheck", userdto);
     }
-    public void register(Map<String, Object> map){
-        sqlSession.insert("user.register", map);
+    public void register(userDTO userdto){
+        sqlSession.insert("user.register", userdto);
     }
 
-    public Integer idoverlap(String r_user_id){
-        return sqlSession.selectOne("user.idoverlap", r_user_id);
+    public Integer idOverlapCheck(userDTO userdto){
+        return sqlSession.selectOne("user.idOverlapCheck", userdto);
     }
-    /*public String FindID(String s_user_name){
-        return sqlSession.selectOne("user.findid");
-    }*/
+
+    public Integer emailOverlapCheck(userDTO userdto){
+        return sqlSession.selectOne("user.emailOverlapCheck", userdto);
+    }
+
+    public Integer phoneOverlapCheck(userDTO userdto){
+        return sqlSession.selectOne("user.phoneOverlapCheck", userdto);
+    }
+
 }
