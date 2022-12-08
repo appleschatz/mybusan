@@ -1,0 +1,11 @@
+CREATE TABLE user(
+	user_id varchar(255) primary key,
+	user_pw	varchar(255) not null,
+	user_name varchar(255) not null,
+	user_email varchar(255) not null,
+	user_phone varchar(255) not null,
+	user_gender varchar(255) not null,
+	user_prop varchar(255),
+	user_mailox varchar(1) not null,
+	user_point int(100) not null default 0
+);
