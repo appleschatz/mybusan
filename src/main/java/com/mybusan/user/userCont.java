@@ -5,7 +5,10 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.mail.internet.MimeMessage;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,20 +17,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+
 import java.io.File;
-import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Random;
+
+
 
 @Controller
 public class userCont {
     @Autowired
     userDAO userdao;
 
-    @RequestMapping("/") // * 지워도 됨
-    public String Home(){
-        return "user/loginForm";
-    }
+    @Autowired
+    private JavaMailSender mailsender;
+
 
     @RequestMapping(value = "/loginForm")
     public String loginForm(){
@@ -89,7 +92,7 @@ public class userCont {
     }
 
     @ResponseBody
-    @RequestMapping("/id_overlap.do")
+    @RequestMapping(value = "/id_overlap.do", method = RequestMethod.POST)
     public int idOverlapCheck(userDTO userdto){
         if(userdao.idOverlapCheck(userdto)==1){ // 중복된 경우
             return 1;
@@ -100,7 +103,7 @@ public class userCont {
     }
 
     @ResponseBody
-    @RequestMapping("/email_overlap.do")
+    @RequestMapping(value = "/email_overlap.do", method = RequestMethod.POST)
     public int emailOverlapCheck(userDTO userdto){
         if(userdao.emailOverlapCheck(userdto)==1){ // 중복된 경우
             return 1;
@@ -111,7 +114,7 @@ public class userCont {
     }
 
     @ResponseBody
-    @RequestMapping("/phone_overlap.do")
+    @RequestMapping(value = "/phone_overlap.do", method = RequestMethod.POST)
     public int phoneOverlapCheck(userDTO userdto){
         if(userdao.phoneOverlapCheck(userdto)==1){ // 중복된 경우
             return 1;
@@ -119,5 +122,67 @@ public class userCont {
         else{
             return 0;
         }
+    }
+
+    @RequestMapping(value = "/findIDForm")
+    public String findIDForm(){
+        return "/user/findIDForm";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/SendVericode.do", method = RequestMethod.POST)
+    public int SendVericode(userDTO userdto, HttpSession session){
+        if(userdao.SendVericode(userdto)==1){ // 이름, 이메일이 일치하는 경우
+            if(session.getAttribute("veri_code_id")!=null){ // 기존에 발급받은 코드가 있다면 삭제
+                session.removeAttribute("veri_code_id");
+            }
+
+            Random rand = new Random();
+            String veri_code = "";
+
+            for(int i=1;i<=10;i++){ // 10자리 영문+숫자 조합의 인증코드 생성
+                switch(rand.nextInt(3)){
+                    case 2 : veri_code += (char)(rand.nextInt(26)+65); break;
+                    case 1 : veri_code += (char)(rand.nextInt(26)+97); break;
+                    case 0 : veri_code += rand.nextInt(10);
+                }
+            }
+
+            try{
+                MimeMessage message = mailsender.createMimeMessage();
+                MimeMessageHelper mailHelper = new MimeMessageHelper(message,"UTF-8");
+                mailHelper.setFrom(""); // 송신자 메일
+                mailHelper.setTo(userdto.getUser_email()); // 수신자 메일
+                mailHelper.setSubject("아이디 찾기 인증코드 발송"); // 메일 제목
+                mailHelper.setText("인증코드는 ["+veri_code+"] 입니다"); // 메일 내용
+
+                mailsender.send(message);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+
+            session.setAttribute("veri_code_id", veri_code); // 세션별로 인증코드 저장
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    }
+
+    @RequestMapping(value = "/findIDProc", method = RequestMethod.POST)
+    public ModelAndView findIDProc(userDTO userdto, @RequestParam String veri_code, HttpSession session){
+        ModelAndView mav = new ModelAndView();
+        String issuedcode = session.getAttribute("veri_code_id").toString();
+
+        if(!veri_code.equals(issuedcode)){ // 인증 코드가 일치하지 않으면
+            mav.setViewName("redirect:/findIDForm"); // 아이디 찾기 폼으로 돌려보냄
+        }
+        else{ // 인증 코드가 일치하면
+            userDTO outputdto = userdao.findIDProc(userdto);
+            session.removeAttribute("veri_code_id"); // 인증용 세션 제거
+            mav.setViewName("user/findIDResult");
+            mav.addObject("user_id", outputdto.getUser_id());
+        }
+        return mav;
     }
 }

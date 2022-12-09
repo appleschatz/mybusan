@@ -30,4 +30,12 @@ public class userDAO {
         return sqlSession.selectOne("user.phoneOverlapCheck", userdto);
     }
 
+    public Integer SendVericode(userDTO userdto){
+        return sqlSession.selectOne("user.SendVericode", userdto);
+    }
+
+    public userDTO findIDProc(userDTO userdto){
+        return sqlSession.selectOne("user.findIDProc", userdto);
+    }
+
 }

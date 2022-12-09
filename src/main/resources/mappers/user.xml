@@ -30,4 +30,16 @@
         FROM user
         WHERE user_phone=#{user_phone}
     </select>
+
+    <select id="SendVericode" resultType="Integer">
+        SELECT COUNT(*)
+        FROM user
+        WHERE user_name=#{user_name} AND user_email=#{user_email}
+    </select>
+
+    <select id="findIDProc" resultType="com.mybusan.user.userDTO">
+        SELECT IFNULL(user_id, "NO_NAME") AS user_id
+        FROM user
+        WHERE user_name=#{user_name} AND user_email=#{user_email}
+    </select>
 </mapper>
