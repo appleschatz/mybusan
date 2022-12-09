@@ -66,7 +66,7 @@
     <!-- The slideshow/carousel -->
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="images/광안대교_마린시티_풍경-1.jpg" alt="" class="d-block" style="width:100%">
+        <img src="images/광안대교.png" alt="" class="d-block" style="width:100%">
       </div>
       <div class="carousel-item">
         <img src="images/20201206-EX7A2469.jpg" alt="" class="d-block" style="width:100%">
@@ -194,7 +194,7 @@
       </div>
       <div class="col-lg-3">
         <div class="card h-100">
-          <img src="images/케이블카.jpg" class="card-img-top" alt="...">
+          <img src="images/해운대풍경6.jpg" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Card title</h5>
             <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
@@ -215,21 +215,21 @@
       <!-- 인기 장소 TOP5 -->
       <div class="row i-style">
         <div class="col-lg-3">
-        <img src="images/케이블카.jpg" class="c-img" alt="...">
+        <img src="images/해운대풍경6.jpg" class="c-img" alt="...">
         </div>
         <div class="col-lg-3">
-        <img src="images/케이블카.jpg" class="c-img" alt="...">
+        <img src="images/해운대풍경6.jpg" class="c-img" alt="...">
         </div>
         <div class="col-lg-3">
-        <img src="images/케이블카.jpg" class="c-img" alt="...">
+        <img src="images/해운대풍경6.jpg" class="c-img" alt="...">
           </div>
       </div>
       <div class="row ii-style">
         <div class="col-lg-5">
-          <img src="images/케이블카.jpg" class="cc-img" alt="...">
+          <img src="images/해운대풍경6.jpg" class="cc-img" alt="...">
         </div>
         <div class="col-lg-4">
-          <img src="images/케이블카.jpg" class="ccc-img" alt="...">
+          <img src="images/해운대풍경6.jpg class="ccc-img" alt="...">
         </div>
       </div>
 
