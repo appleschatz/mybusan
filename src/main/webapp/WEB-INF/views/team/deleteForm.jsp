@@ -13,7 +13,7 @@
 <body>
 
     <div class="title">팀 삭제</div>
-	<form method="post" action="delete.do">
+	<form method="post" action="team/delete.do">
 		<input type="hidden" name="team_no" value="${requestScope.team_no}">
 		<div class="content">
 			<p>팀게시글을 삭제하시겠습니까?</p>

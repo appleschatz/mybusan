@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="board">
+
+	<select id="list" resultType="java.util.Map">
+		SELECT ce_sequence,ce_name,ce_content,ce_review,ce_filename
+		FROM ac_certification
+		ORDER BY ce_sequence
+		LIMIT 10 OFFSET 0
+	</select>
+	
+	<insert id="insert" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="seq">
+		INSERT INTO ac_certification(ce_name,ce_content,ce_review,ce_filename)
+		VALUES(#{ce_name}, #{ce_content} , #{ce_review} , #{ce_filename})
+	</insert>
+	
+	<select id="search" resultType="java.util.Map">
+		SELECT ce_sequence, ce_name, ce_content, ce_review , ce_filename
+		FROM ac_certification
+		WHERE ce_name LIKE #{ce_name}
+		ORDER BY ce_name
+	</select>
+	
+	<select id="detail" resultType="java.util.Map">
+		SELECT ce_sequence, ce_name, ce_content, ce_review , ce_filename
+		FROM ac_certification
+		WHERE ce_sequence = #{ce_sequence}
+	</select>
+	
+	<update id="update">
+		UPDATE ac_certification
+		SET ce_name        =  #{ce_name}
+		     , ce_content  =  #{ce_content}
+		     , ce_review   =  #{ce_review}
+		     , ce_filename =  #{ce_filename}
+		WHERE ce_sequence  =  #{ce_sequence}
+	</update>
+	
+	<select id="filename" resultType="String">
+		SELECT ce_filename
+		FROM ac_certification
+		WHERE ce_sequence = #{ce_sequence}
+	</select>
+
+	<delete id="delete">
+		DELETE FROM ac_certification
+		WHERE ce_sequence = #{ce_sequence}
+	</delete>
+
+
+	
+	
+</mapper>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="user">
+    <select id="loginCheck" resultType="com.mybusan.user.userDTO">
+        SELECT user_id, user_pw
+        FROM user
+        WHERE user_id=#{user_id} AND user_pw=#{user_pw}
+    </select>
+
+    <insert id="register">
+        INSERT INTO user(user_id, user_pw, user_name, user_email, user_phone, user_gender, user_prop, user_mailox)
+        VALUES (#{user_id},#{user_pw},#{user_name},#{user_email},#{user_phone},#{user_gender},#{user_prop},#{user_mailox})
+    </insert>
+
+    <select id="idOverlapCheck" resultType="Integer">
+        SELECT COUNT(user_id)
+        FROM user
+        WHERE user_id=#{user_id}
+    </select>
+
+    <select id="emailOverlapCheck" resultType="Integer">
+        SELECT COUNT(user_email)
+        FROM user
+        WHERE user_email=#{user_email}
+    </select>
+
+    <select id="phoneOverlapCheck" resultType="Integer">
+        SELECT COUNT(user_phone)
+        FROM user
+        WHERE user_phone=#{user_phone}
+    </select>
+
+    <select id="SendVericode" resultType="Integer">
+        SELECT COUNT(*)
+        FROM user
+        WHERE user_name=#{user_name} AND user_email=#{user_email}
+    </select>
+
+    <select id="findIDProc" resultType="com.mybusan.user.userDTO">
+        SELECT IFNULL(user_id, "NO_NAME") AS user_id
+        FROM user
+        WHERE user_name=#{user_name} AND user_email=#{user_email}
+    </select>
+</mapper>

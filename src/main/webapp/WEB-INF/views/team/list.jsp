@@ -22,8 +22,9 @@
 
     <div class="title">팀 목록</div>
     <div class="content">
-        <input type="button" value="팀 등록" onclick="location.href='create.do'">
+        <input type="button" value="팀 등록" onclick="location.href='/team/create.do'">
         <input type="button" value="HOME"   onclick="location.href='/home.do'">
+        <input type="button" onclick="location.href='/board/list'" value="팀 인증">
     </div>
     
     <table>
@@ -40,7 +41,7 @@
     <c:forEach var="dto" items="${list}">
         <tr>
             <td>${dto.team_no}</td> 
-            <td><a href="/read.do?team_no=${dto.team_no}">${dto.team_name}</a></td>
+            <td><a href="/team/read.do?team_no=${dto.team_no}">${dto.team_name}</a></td>
             <td>${dto.team_intro}</td>
             <td>${dto.team_interest}</td>
             <td>${dto.team_number}</td>

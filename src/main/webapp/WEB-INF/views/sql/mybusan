@@ -171,10 +171,10 @@ Insert into	voters(“3”,”park1”,”2”);
 
 
  Create table 	Achievements(
-	ac_code				varchar primary key
-	,ac_name			varchar not null 
-	,ac_point			int(10) not null
-	,ac_contents		varchar not null ); — 업적목록테이블
+	ac_code			 	varchar  primary key
+	,ac_name		 	varchar not null 
+	,ac_point		 	int(10) not null
+	,ac_contents	 	varchar not null ); — 업적목록테이블
 
 insert into Achievements values ('M1', '부산 맛집 탐방1', 1, '해운대 앞 조개구이 먹기');
 insert into Achievements values ('M2', '부산 맛집 탐방2', 2, '돼지국밥 먹기');

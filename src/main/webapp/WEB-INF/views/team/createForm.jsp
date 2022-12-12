@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="team_no">팀 등록</div>
-    <form name='frm' method='post' action='create.do' enctype="multipart/form-data">
+    <form name='frm' method='post' action='/team/create.do' enctype="multipart/form-data">
         <input type="hidden"><!-- 부모글번호 -->
         <table class='table'>
         <tr>
@@ -55,7 +55,7 @@
         
         <div class="bottom">
         	<input type='submit' value='팀등록'>
-        	<input type="button" value="팀목록" onclick="location.href='list.do'">
+        	<input type="button" value="팀목록" onclick="location.href='/team/list.do'">
             <input type="button" value="HOME"  onclick="location.href='/home.do'"> <!-- 절대경로 -->
         </div>
     </form>

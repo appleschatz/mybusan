@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="title">팀 수정</div>
-    <form name="frm" method="post" action="update.do" enctype="multipart/form-data">
+    <form name="frm" method="post" action="team/update.do" enctype="multipart/form-data">
         <input type="hidden" name="team_no"      value="${dto.team_no}">     <!-- 내글번호 -->
         <table class='table'>
         <tr>
@@ -48,7 +48,7 @@
 
         <div class='bottom'>
           <input type='submit' value='팀수정'>
-          <input type="button" value="팀목록" onclick="location.href='/list.do">
+          <input type="button" value="팀목록" onclick="location.href='team/list.do">
           <input type="button" value="HOME"   onclick="location.href='/home.do'">   
         </div>  
     </form>
