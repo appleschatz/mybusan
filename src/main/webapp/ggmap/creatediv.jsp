@@ -5,13 +5,26 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+
 </head>
+<script>function input(){
+	var id=$('.asd').val();
+	alert(id);
+}</script>
 <body>
 
-<div onclick="addlist()" style='cursor:pointer;'>장소1</div>
-<div onclick="createDiv()" style='cursor:pointer;'>장소2</div>
+<div id="asd" onclick="input()" style='cursor:pointer;'>장소1</div>
+<div id="asd"	onclick="createDiv()" style='cursor:pointer;'>장소2</div>
+
+
+
+
 
 <script>
+	
+
+
 	function addlist(){
 		//alert('리스트추가완료');
 			  // 1. <div> element 만들기

@@ -80,22 +80,48 @@
 </head>
 <body>
         <h1 class="content_title">일정만들기</h1>
+        
           <div id="map" style="width: 400px; height: 500px; float:right;"></div>
       
-        <div ><input type="button" value="초기화" onclick=""></div>
+      
+      <div>
+        <div ><input type="button" value="초기화" onclick="deleteMarkers()"></div>
          <li class="jjstyle"><a href="#" class="nav-link" onclick="location.href='/home.do'">BuSaNsRUN</a></li>
+         </div>
+         
+         <form id='form' onsubmit="return false" action=''>
+         <table class='table'>
+        <tr>
+          <th>제목</th>
+          <td>	<input type="hidden" name='user_id' value="">
+          		<input type="text" name="s_title" value="">
+          </td>    
+        </tr>
+        <tr>
+          <th>내용</th>
+          <td><input type="text" name="s_content" ></td>
+        </tr>
+        <tr>
+          <th>출발일</th>
+          <td><input type='date' name='s_startdate'></td>
+        </tr>
+        <tr>
+          <th>종료일</th>
+          <td><input type="date" name="s_enddate" ></td>
+        </tr>
+        </table>
+        <div id="placelist"><h2>일정목록</h2></div>
+       
+       	</form>
+         <input type='submit' value='팀등록'>
+        
         
          <div class="row">
 		<table id="list" width="100%" class="table table-bordered table-hover text-center">
     <tr>
         <th>장소번호</th>
         <th>장소명</th>
-        <th>카테고리명</th>
-        <th>시도명</th>
-        <th>시군구명</th>
-        <th>읍면동명</th>
-        <th>리명</th>
-        <th>도로명주소</th>
+      
         <th>위도/경도</th>
         
     </tr>
@@ -104,13 +130,8 @@
         <tr>
             <td>${dto.p_code}</td> 
             <td>${dto.p_name}</td>
-            <td>${dto.p_category}</td>
-            <td>${dto.p_sido}</td>
-            <td>${dto.p_sigungu}</td>
-            <td>${dto.p_umd}</td>
-            <td>${dto.p_ri}</td>
-            <td>  ${dto.p_address} </td>
-             <td id="a1" style="cursor:pointer;">${dto.p_lng}</td>	
+          
+             <td id="a1" >${dto.p_lng}</td>	
               <td id="a2" >${dto.p_lat}</td>												
         </tr>	
     </c:forEach>
@@ -118,7 +139,7 @@
 
     
     </table>
-    
+    </div>
     
     <div class="col-lg-12" id="ex1_Result1" ></div> 
 		<div class="col-lg-12" id="ex1_Result2" ></div> 
@@ -133,6 +154,8 @@
  	var a;
  	var b;
  	var name=0;
+ 	var list=[];
+ 	var i=0;
     
 	$("#list tr").click(function(){ 	
 
@@ -157,17 +180,26 @@
 	
 	var p_lat = td.eq(8).text();
 	var p_lng = td.eq(9).text();
+	var p_name = td.eq(1).text();
+	var p_code = td.eq(0).text();
+	
+	 list[i] = p_name;
+	 $("#placelist").append("<div id=p_name><input id='p_code' type='hidden' value='"+p_code+"'>"+list[i]+"</div>");
+	 i++
 	
 	a=parseFloat(p_lng);
 	b=parseFloat(p_lat);
 	str +=	" * 클릭된 Row의 td값 = 위도. : " + p_lng + "경도: " +p_lat + "</font>"
 			;		
 	
+	
+	
 		
 	$("#ex1_Result2").html(str);
 	changeCenter();
+
 });
-	
+	 let markers = [];
 	
 	 function changeCenter() {
 		
@@ -175,9 +207,9 @@
 	        var aa = {lat : a , lng : b};
 
 	      map.panTo(aa);
-	      map.setZoom(15.5);
+	      map.setZoom(12);
 	      
-	      var mainMarker = new google.maps.Marker({
+	      var Marker = new google.maps.Marker({
 	          position: aa,
 	          map: map,
 	          label: {
@@ -189,11 +221,27 @@
 	              labelOrigin: new google.maps.Point(40, 23)
 	          }
 	        });
-	      
+	   markers.push(Marker);
 	   return name;
 	 }  
 	
+	 function setMapOnAll(map) {
+		  for (let i = 0; i < markers.length; i++) {
+		    markers[i].setMap(map);
+		  }
+		}
+	 function deleteMarkers() {
+		 setMapOnAll(null);
+		 markers = [];
+		 list = [];
+		 initMap()
+		 name=0;
+		 $('form')[0].reset();
+		 $("#placelist").empty();
+		// $("#p_name").removeChild();
+		 }
 	 </script>
+	    
 	    
 	    
    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOEzcMjj5U0v2WX9e3uNfvqPJsgsl0Ttk&callback=initMap&v=weekly"  defer>

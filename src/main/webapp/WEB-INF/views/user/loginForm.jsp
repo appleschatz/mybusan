@@ -20,7 +20,7 @@
 <div class="container">
     <div class="d-flex justify-content-center">
         <div class="col-sm-6 col-6">
-            <h3 class="text-center">Busan</h3>
+            <h3 class="text-center" onclick="location.href='/home.do'">Busan</h3>
 
             <form class="form" method="post" action="loginProc">
                 <div class="form-group my-1">

@@ -27,7 +27,7 @@ public class BoardCont {
     @Autowired
     BoardDAO boardDao;
   
-    @RequestMapping("board/list")		//게시글 작성 화면 호출
+    @RequestMapping("/board/list")		//게시글 작성 화면 호출
     public ModelAndView list(@RequestParam(name = "page", defaultValue = "1") int pageNum) {
     	ModelAndView mav = new ModelAndView();
     	mav.setViewName("board/list");

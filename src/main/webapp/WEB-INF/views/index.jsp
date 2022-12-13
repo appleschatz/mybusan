@@ -44,8 +44,8 @@
               </div>
     
             <div class="text-end">
-              <button type="button" class="l-box">로그인</button>
-              <button type="button" class="l-box">회원가입</button>
+              <button type="button" class="l-box" onclick="location.href='/loginForm'">로그인</button>
+              <button type="button" class="l-box" onclick="location.href='/registerForm'">회원가입</button>
             </div>
           </div>
         </div>
@@ -272,7 +272,7 @@
             <h5 class="fff-style">고객센터</h5>
             <ul class="nav flex-column">
               <li class="nav-item mb-2 ff-style"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-              <li class="nav-item mb-2 ff-style"><a href="#" class="nav-link p-0 text-muted">문의하기</a></li>
+              <li class="nav-item mb-2 ff-style"><a href="#" class="nav-link p-0 text-muted" onclick="location.href='/qna/create.do'">문의하기</a></li>
             </ul>
           </div>
         </footer>
