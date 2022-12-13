@@ -77,28 +77,28 @@ public class ScheduleDAO {
 //		    }//totalRowCount() end
 //		    
 //		    
-		    public int create(ScheduleDTO dto) {
-		        int cnt = 0;
-		        try {
-		            sql = new StringBuilder();
-		            
-		            
-		            sql.append(" INSERT INTO (team_no,s_no,user_id,team_name, team_intro, team_interest, team_number, team_sdate,team_edate,team_state) ");
-		            sql.append(" VALUES( (select ifnull(max(team_no)+1,1) from team as TM), ?, ?, ?, ?, ?,?,now(),?, '진행중') ");
-		            
-		           
-		            //Maria DB
-		            //sql.append(" INSERT INTO media(mediano, title, rdate, poster, filename, filesize, mview, mediagroupno)");
-		            //sql.append(" VALUES((select ifnull(max(mediano),0)+1 from media as TB), ?, now(), ?, ?, ?, 'Y', ?)");            
-		            
-		            cnt=jt.update(sql.toString(),dto.getS_no(), dto.getUser_id(), dto.getTeam_name(), dto.getTeam_intro(), dto.getTeam_interest(), dto.getTeam_number(),dto.getTeam_edate());
-		        } catch (Exception e) {
-		            System.out.println("팀등록실패"+e);
-		        }//end
-		        
-		        return cnt;
-		        
-		    }//create() end
+//		    public int create(ScheduleDTO dto) {
+//		        int cnt = 0;
+//		        try {
+//		            sql = new StringBuilder();
+//		            
+//		            
+//		            sql.append(" INSERT INTO (team_no,s_no,user_id,team_name, team_intro, team_interest, team_number, team_sdate,team_edate,team_state) ");
+//		            sql.append(" VALUES( (select ifnull(max(team_no)+1,1) from team as TM), ?, ?, ?, ?, ?,?,now(),?, '진행중') ");
+//		            
+//		           
+//		            //Maria DB
+//		            //sql.append(" INSERT INTO media(mediano, title, rdate, poster, filename, filesize, mview, mediagroupno)");
+//		            //sql.append(" VALUES((select ifnull(max(mediano),0)+1 from media as TB), ?, now(), ?, ?, ?, 'Y', ?)");            
+//		            
+//		            cnt=jt.update(sql.toString(),dto.getS_no(), dto.getUser_id(), dto.getTeam_name(), dto.getTeam_intro(), dto.getTeam_interest(), dto.getTeam_number(),dto.getTeam_edate());
+//		        } catch (Exception e) {
+//		            System.out.println("팀등록실패"+e);
+//		        }//end
+//		        
+//		        return cnt;
+//		        
+//		    }//create() end
 //		    
 //		    
 //		    // 팀 정원옆에 현재 모집인원도 있으면 좋을듯!! 현재인원 칼럼을 새로 만들어야 되나?

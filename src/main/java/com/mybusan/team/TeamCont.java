@@ -9,9 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.mybusan.team.TeamDAO;
-
-
 @Controller
 public class TeamCont {
 
@@ -63,16 +60,19 @@ public class TeamCont {
 	        return mav;
 	    }//list() end
 	 
-	 @RequestMapping("team/read.do")
-	    public ModelAndView read(int team_no) {
-	        ModelAndView mav=new ModelAndView();
-	        mav.setViewName("team/read");
-	        TeamDTO dto=dao.read(team_no);
-	       
-	        
-	        mav.addObject("dto", dto);
-	        return mav;
-	    }//read() end
+//	 @RequestMapping("team/read.do")
+//	    public ModelAndView read(int team_no) {
+//	        ModelAndView mav=new ModelAndView();
+//	        mav.setViewName("team/read");
+//	        TeamDTO dto=dao.read(team_no);
+//	        mav.addObject("dto", dto);
+//	        
+//	        List<TMDTO> TMlist=dao.TMlist(team_no);
+//	        
+//	        mav.addObject("TMlist",  TMlist);
+//	        
+//	        return mav;
+//	    }//read() end
 	 
 	 @RequestMapping(value = "team/delete.do", method = RequestMethod.GET)
 	    public ModelAndView deleteForm(int team_no) {
@@ -153,4 +153,6 @@ public class TeamCont {
 	        
 	        return mav;
 	    }//updateProc() end
+	 
+	 
 }

@@ -31,6 +31,7 @@ public class TeamDAO {
             sql=new StringBuilder();
             sql.append(" SELECT team_no, s_no, user_id, team_name, team_intro, team_interest, team_number,team_sdate,team_edate,team_state ");
             sql.append(" FROM team ");
+            sql.append(" ORDER BY team_no DESC ");
             
             
             RowMapper<TeamDTO> rowMapper=new RowMapper<TeamDTO>() {
@@ -174,5 +175,40 @@ public class TeamDAO {
         }//end
         return cnt;
     }//update end
+    
+//    public List<TMDTO> TMlist(int team_no) {
+//        List<TMDTO> TMlist=null;
+//        try {
+//            sql=new StringBuilder();
+//            sql.append(" SELECT team_mem_no,team_no,user_id,team_mem_state,team_mem_adate ");
+//            sql.append(" FROM team_member ");
+//            sql.append(" WHERE team_no = " + team_no);
+//            
+//            
+//            RowMapper<TMDTO> rowMapper=new RowMapper<TMDTO>() {
+//                @Override
+//                public TMDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
+//                	TMDTO dto=new TMDTO();
+//                	 
+//                           dto.setTeam_mem_no(rs.getInt("team_mem_no"));
+//                           dto.setTeam_no(rs.getInt("team_no"));
+//                           dto.setUser_id(rs.getString("user_id"));
+//                           dto.setTeam_mem_state(rs.getString("team_mem_state"));
+//                           dto.setTeam_mem_adate(rs.getString("team_mem_adate"));
+//                           return dto;
+//                    
+//                   
+//                }//mapRow() end
+//            };//rowMapper end
+//            
+//            TMlist=jt.query(sql.toString(), rowMapper);
+//
+//        }catch(Exception e){
+//            System.out.println("Team목록 실패:"+e);
+//         }//end
+//        
+//         return TMlist;
+//        
+//    }//list() end
 }
   
