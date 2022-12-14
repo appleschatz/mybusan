@@ -14,6 +14,10 @@ public class userDTO {
     private char user_mailox;
     private int user_point;
 
+    public userDTO() {
+		// TODO Auto-generated constructor stub
+	}
+    
     public String getUser_id() {
         return user_id;
     }

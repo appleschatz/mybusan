@@ -85,7 +85,9 @@ function nameCheck(){
 }
 
 function emailCheck(){
-    let emailPattern = /^[A-Za-z0-9`~!@#$%^&*()-_=+]+@[a-zA-Z0-9]+\.[a-zA-Z]+$/;
+    let emailPattern = 
+    // /^[A-Za-z0-9`~!@#$%^&*()-_=+]+@[a-zA-Z0-9]+\.[a-zA-Z]+$/;
+    /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
     let user_email = $('#user_email').val();
 
     if(user_email==''){
@@ -117,7 +119,8 @@ function emailCheck(){
 }
 
 function phoneCheck(){
-    let phonePattern = /^[0-9]{10,}$/;
+    let phonePattern = // /^[0-9]{10,}$/; 
+    /^01(?:0|1|[6-9])[.-]?(\\d{3}|\\d{4})[.-]?(\\d{4})$/;
     let user_phone = $('#user_phone').val();
 
     if(user_phone==''){
@@ -158,7 +161,8 @@ function propPreview(input) {
 
 function registerCheck(){
     let formData = new FormData();
-    if(idCheckResult==true && pwCheckResult1==true && pwCheckResult2==true && nameCheckResult==true && emailCheckResult==true && phoneCheckResult==true){
+    if(idCheckResult==true && pwCheckResult1==true && pwCheckResult2==true && nameCheckResult==true //&& emailCheckResult==true && phoneCheckResult==true
+    	){
         formData.append('user_id', $('#user_id').val());
         formData.append('user_pw', $('#user_pw_1').val());
         formData.append('user_name', $('#user_name').val());

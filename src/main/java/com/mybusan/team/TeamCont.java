@@ -34,13 +34,13 @@ public class TeamCont {
 	            String msg1 ="<p>팀 등록 실패</p>";
 	            String img  ="<img src='../images/fail.png'>";
 	            String link1="<input type='button' value='다시시도' onclick='javascript:history.back()'>";
-	            String link2="<input type='button' value='그룹목록' onclick='location.href=\"list.do\"'>";
+	            String link2="<input type='button' value='그룹목록' onclick='location.href=\"/team/list.do\"'>";
 	            mav.addObject("msg1",  msg1);
 	            mav.addObject("img",   img);
 	            mav.addObject("link1", link1);
 	            mav.addObject("link2", link2);
 	        }else {
-	            mav.setViewName("redirect:/list.do");
+	            mav.setViewName("redirect:/team/list.do");
 	        }//if end
 	        return mav;
 	    }//createProc() end

@@ -38,14 +38,16 @@
             </tr>
             <tr>
                 <td>이메일</td>
-                <td><input type="text" name="user_email" id="user_email" oninput="emailCheck();" required></td>
+                <td><input type="text" name="user_email" id="user_email"  required></td>
+                <!-- oninput="emailCheck();" -->
             </tr>
             <tr>
                 <td><span id="emailCheckResult"></span></td>
             </tr>
             <tr>
                 <td>연락처</td>
-                <td><input type="number" name="user_phone" id="user_phone" oninput="phoneCheck();" placeholder="'-'없이 숫자만 입력해주세요" required></td>
+                <td><input type="number" name="user_phone" id="user_phone"  placeholder="'-'없이 숫자만 입력해주세요" required></td>
+            <!-- oninput="phoneCheck();" -->
             </tr>
             <tr>
                 <td><span id="phoneCheckResult"></span></td>

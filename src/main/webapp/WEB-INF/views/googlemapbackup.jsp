@@ -9,11 +9,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>일정만들기</title>
-    <script src="../js/jquery-3.6.1.min.js"></script>
-    <script src="../js/jquery.cookie.js"></script>
-    <script src="../js/place.js"></script>
-    <link href="../css/css1213.css" rel="stylesheet">
-    
      <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 
    
@@ -86,7 +81,7 @@
 <body>
         <h1 class="content_title">일정만들기</h1>
         
-          <div id="map" style="width: 400px; height: 500px; float:right; position:absolute;"></div>
+          <div id="map" style="width: 400px; height: 500px; float:right;"></div>
       
       
       <div>
@@ -121,69 +116,33 @@
          <input type='submit' value='팀등록'>
         
         
-         <div id="gugun_first">
-	    <div class="fl" style="width:256px; position:absolute;">
-	    	<div class="title_box">
-	    		<div class="gugun_title">구/군별로 선택</div>
-	    	</div>
-	    	
-	    	<div id="search_box" style="width:256px; height:51px; padding:10px; border-bottom:solid #d6d6d6 1px;">
-		    	<div>
-	    		     <a href='javascript:location.reload();'><img src="../images/왼화살표.png" class="dong_box_img" id="gangseogu_dui"></a>
-	    	    </div>
-    	    </div>
-    	    
-	    	<div id="ggid" class="guguns" style="height:715px;">
-				<c:forEach var="dto" items="${list2}" varStatus="vs">
-			    	<div class="gugun_list" id="gangseogu"> 
-			    		<!--<img src="../images/카드1.jpg" class="gugunList_img">-->
-			    		
-			    		<div  class="gugun_name" id="sggid${vs.count}">
-			    		    <a href="#" onclick="test('${dto.p_sigungu}')">
-			    		        ${dto.p_sigungu} 
-			    		        <img src="../images/화살표.png" class="hsp_img">
-			    		    </a>
-			    		</div>
-			    		
-			    	</div>
-	 			</c:forEach>
-	    	</div>
-	    </div>
+         <div class="row">
+		<table id="list" width="100%" class="table table-bordered table-hover text-center">
+    <tr>
+        <th>장소번호</th>
+        <th>장소명</th>
+      
+        <th>위도/경도</th>
+        
+    </tr>
+    	
+    <c:forEach var="dto" items="${list}">
+        <tr>
+            <td>${dto.p_code}</td> 
+            <td>${dto.p_name}</td>
+          
+             <td id="a1" >${dto.p_lng}</td>	
+              <td id="a2" >${dto.p_lat}</td>												
+        </tr>	
+    </c:forEach>
+    
+
+    
+    </table>
     </div>
     
-    
-    <script>
-    $('#gangseogu_dui').hide();
-		function test(p_sigungu){
-			//alert(p_sigungu); 예)강서구
-			$('#gangseogu_dui').show();
-			$.ajax({
-                url:'/place/list3.do'
-               , type:'get'
-               , data:{'p_sigungu':p_sigungu}
-               , success:function(data){
-            	    //alert(data);
-                    let a='';
-                    $.each(data, function(key, value){
-						a+='<div class="gugun_list" id="gangseogu">';
-						a+='    <div  class="gugun_name" id="sggid">';
-						a+= value.p_umd;
-						a+='       <img src="../images/화살표.png" class="hsp_img">';
-						a+='    </div>';
-						a+='</div>';
-						a+='';
-                    });//each end
-					
-                    $("#ggid").empty();
-                    $("#ggid").html(a);
-                }//success end
-		    });//ajax() end	
-			
-		}//test() end
-    
-    
-    
-    </script>
+    <div class="col-lg-12" id="ex1_Result1" ></div> 
+		<div class="col-lg-12" id="ex1_Result2" ></div> 
     
     
     
