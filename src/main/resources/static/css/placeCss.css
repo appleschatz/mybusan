@@ -1,2 +1,52 @@
 @charset "UTF-8";
 
+.fl{float:left;}
+
+#place_full_box 
+.title_box {
+    width: 265px;
+    height: 70px;
+    background: #707070;
+    color: #fff;
+    line-height: 70px;
+    font-size: 17px;
+    font-weight: bold;
+    padding: 0px 10px;
+}
+
+#sigungu_list_box {
+    overflow-y: scroll;
+}
+
+#sigungu_list_box .item {
+    padding: 15px;
+    cursor: pointer;
+    border-bottom: solid #a7a7a7 1px;
+    background-color: #fff;
+    width: 248px;
+    position: relative;
+}
+
+.item .img_box {
+    width: 62px;
+    height: 55px;
+    position: relative;
+}
+
+.item .info_box {
+    margin-left: 5px;
+}
+
+.item .info_title {
+    font-size: 15px;
+    color: #363636;
+}
+
+#umd_list_box {
+    overflow-y: scroll;
+}
+
+
+
+
+

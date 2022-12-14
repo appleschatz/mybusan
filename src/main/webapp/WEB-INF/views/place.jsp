@@ -2,55 +2,84 @@
     pageEncoding="UTF-8"%>
     
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>    
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>    
-
-<!DOCTYPE html>
-<html>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>       
+    
+<html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <title>placeList.jsp</title>
-	<link href="../css/placeCss.css" rel="stylesheet"/> 	
+    <title>bssRun placeList</title>
+    
+	<script src="../js/jquery-3.6.1.min.js"></script>
+    <script src="../js/jquery.cookie.js"></script>
+    <script src="../js/place.js"></script>
+    <link href="../css/css1213.css" rel="stylesheet">
+
 </head>
 <body>
-
-
-
-
-    <div id=>부산광역시</div>
-    <div class="content">
-        <input type="button" value="HOME" onclick="location.href='/home.do'">
+    <div id="gugun_first">
+	    <div class="fl" style="width:256px; position:absolute;">
+	    	<div class="title_box">
+	    		<div class="gugun_title">구/군별로 선택</div>
+	    	</div>
+	    	
+	    	<div id="search_box" style="width:256px; height:51px; padding:10px; border-bottom:solid #d6d6d6 1px;">
+		    	<div>
+	    		     <a href='javascript:location.reload();'><img src="../images/왼화살표.png" class="dong_box_img" id="gangseogu_dui"></a>
+	    	    </div>
+    	    </div>
+    	    
+	    	<div id="ggid" class="guguns" style="height:715px;">
+				<c:forEach var="dto" items="${list2}" varStatus="vs">
+			    	<div class="gugun_list" id="gangseogu"> 
+			    		<!--<img src="../images/카드1.jpg" class="gugunList_img">-->
+			    		
+			    		<div  class="gugun_name" id="sggid${vs.count}">
+			    		    <a href="#" onclick="test('${dto.p_sigungu}')">
+			    		        ${dto.p_sigungu} 
+			    		        <img src="../images/화살표.png" class="hsp_img">
+			    		    </a>
+			    		</div>
+			    		
+			    	</div>
+	 			</c:forEach>
+	    	</div>
+	    </div>
     </div>
     
-    <table>
-    <tr>
-        <th>장소번호</th>
-        <th>장소명</th>
-        <th>카테고리명</th>
-        <th>시도명</th>
-        <th>시군구명</th>
-        <th>읍면동명</th>
-        <th>리명</th>
-        <th>도로명주소</th>
-        <th>위도</th>
-        <th>경도</th>
-    </tr>
     
-    <c:forEach var="dto" items="${list}">
-        <tr>
-            <td>${dto.p_code}</td> 
-            <td><a href="place/read.do?p_code=${dto.p_code}">${dto.p_name}</a></td>
-            <td>${dto.p_category}</td>
-            <td>${dto.p_sido}</td>
-            <td>${dto.p_sigungu}</td>
-            <td>${dto.p_umd}</td>
-            <td>${dto.p_ri}</td>
-            <td>${dto.p_address}</td>
-            <td>${dto.p_lng}</td>
-             <td>${dto.p_lat}</td>													
-        </tr>	
-    </c:forEach>
+    <script>
+    $('#gangseogu_dui').hide();
+		function test(p_sigungu){
+			//alert(p_sigungu); 예)강서구
+			$('#gangseogu_dui').show();
+			$.ajax({
+                url:'/place/list3.do'
+               , type:'get'
+               , data:{'p_sigungu':p_sigungu}
+               , success:function(data){
+            	    //alert(data);
+                    let a='';
+                    $.each(data, function(key, value){
+						a+='<div class="gugun_list" id="gangseogu">';
+						a+='    <div  class="gugun_name" id="sggid">';
+						a+= value.p_umd;
+						a+='       <img src="../images/화살표.png" class="hsp_img">';
+						a+='    </div>';
+						a+='</div>';
+						a+='';
+                    });//each end
+					
+                    $("#ggid").empty();
+                    $("#ggid").html(a);
+                }//success end
+		    });//ajax() end	
+			
+		}//test() end
     
-    </table>
     
+    
+    </script>
+    
+  
+    	
 </body>
 </html>

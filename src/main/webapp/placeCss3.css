@@ -1,0 +1,8 @@
+@charset "EUC-KR";
+
+.detail {
+            width: 400px;
+            text-align: center;
+            line-height: 1.8;
+            display: none;
+        }

@@ -28,7 +28,7 @@ public class PlaceDAO {
 	        try {
 	            sql=new StringBuilder();
 	            sql.append(" SELECT p_code, p_name, p_category, p_sido, p_sigungu, p_umd, p_ri, p_address, p_lng, p_lat ");
-	            sql.append(" FROM place ");
+	            sql.append(" FROM place where p_code<=50");
 	            
 	            
 	            RowMapper<PlaceDTO> rowMapper=new RowMapper<PlaceDTO>() {
@@ -62,5 +62,83 @@ public class PlaceDAO {
 	        
 	    }//list() end
 
-	}
+	 
+	 
+	 
+	 public List<PlaceDTO> list2() {
+	        List<PlaceDTO> list2=null;
+	        try {
+	            sql=new StringBuilder();
+	            sql.append(" SELECT p_sigungu, p_lat, p_lng ");
+	            sql.append(" FROM place where p_sido='부산광역시' group by p_sigungu order by p_sigungu ");
+	            
+	            
+	            RowMapper<PlaceDTO> rowMapper=new RowMapper<PlaceDTO>() {
+	                @Override
+	                public PlaceDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
+	                		PlaceDTO dto=new PlaceDTO();	                	                           
+	                           dto.setP_sigungu(rs.getString("p_sigungu"));
+	                           dto.setP_lat(rs.getFloat("p_lat"));
+	                           dto.setP_lng(rs.getFloat("p_lng"));
+	                           return dto;               
+	                   
+	                }//mapRow() end
+	            };//rowMapper end
+	            
+	            list2=jt.query(sql.toString(), rowMapper);
+
+	        }catch(Exception e){
+	            System.out.println("장소 불러오기 실패:"+e);
+	         }//end
+	        
+	         return list2;
+	        
+	    }//list2() end
+	 
+	 
+	 
+	 
+	 public List<PlaceDTO> list3(String p_sigungu) {
+	        List<PlaceDTO> list3=null;
+	        try {
+	            sql=new StringBuilder();
+	            sql.append(" SELECT distinct(p_umd)");
+	            sql.append(" FROM place where p_sigungu="+"'"+p_sigungu+"'");
+//	            order by p_umd
+	           System.out.println(p_sigungu+"----------------");
+	           
+	           
+	            
+	            RowMapper<PlaceDTO> rowMapper=new RowMapper<PlaceDTO>() {
+	                @Override
+	                public PlaceDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
+	                		PlaceDTO dto=new PlaceDTO();	    
+	                           dto.setP_umd(rs.getString("p_umd"));
+	                           System.out.println(dto.getP_umd()+"-------------------------");
+	                           return dto;               
+	                   
+	                }//mapRow() end
+	            };//rowMapper end
+	            
+	            list3=jt.query(sql.toString(), rowMapper);
+
+	        }catch(Exception e){
+	            System.out.println("장소 불러오기 실패:"+e);
+	         }//end
+	        
+	         return list3;
+	        
+	    }//list3() end	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	}//class end
 
